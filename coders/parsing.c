@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:18:52 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/03 10:46:17 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/03 14:17:59 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	is_invalid_value(char *string)
 		if (string[i] != '0')
 			is_only_zero = 0;
 	}
-	if (!is_only_zero && strlen(string) > 10)
+	if (strlen(string) > 9 && string[9] >= '8')
 	{
-		printf("%d\n", atoi(string));
-		if (atoi(string) <= 0)
+		string[9] = '\0';
+		if (atoi(string) >= 214748364)
 			return (1);
 	}
 	return (0);
@@ -60,10 +60,7 @@ t_args	*get_args(int argc, char **argv)
 	if (argc != 9)
 		return (NULL);
 	if (!validate_args(argv))
-	{
-		printf("Arguments error: Number arguments must be <2147483647, >=0.\n");
 		return (NULL);
-	}
 	args_ptr->nb_coders = atoi(argv[1]);
 	args_ptr->burnout_time = atoi(argv[2]);
 	args_ptr->compile_time = atoi(argv[3]);
@@ -72,12 +69,8 @@ t_args	*get_args(int argc, char **argv)
 	args_ptr->nb_compiles = atoi(argv[6]);
 	args_ptr->dongle_cooldown = atoi(argv[7]);
 	args_ptr->scheduler = argv[8];
-	if ((strcmp(argv[8], "fifo") == 0) || (strcmp(argv[8], "edf") == 0))
-		args_ptr->scheduler = argv[8];
-	else
-	{
-		printf("Arguments error: Scheduler must be \"fifo\" or \"edf\".\n");
+	if (!(strcmp(argv[8], "fifo") == 0) && !(strcmp(argv[8], "edf") == 0))
 		return (NULL);
-	}
+	args_ptr->scheduler = argv[8];
 	return (args_ptr);
 }
