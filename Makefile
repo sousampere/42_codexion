@@ -6,7 +6,7 @@
 #    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/03 08:44:55 by gtourdia         ###   ########.fr        #
+#    Updated: 2026/04/03 08:48:45 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ PROJECT_START_DATE=2026-04-03
 GITHUB=https://github.com/sousampere/
 NAME=codexion
 COMPILER=cc
-FLAGS=-Wall -Wextra -Werror -pthread
+FLAGS=-Wall -Wextra -Werror -pthread -g3
 C_FILES=coders/codexion.c coders/parsing.c
 H_FILES=coders/codexion.h
 

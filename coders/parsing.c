@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:18:52 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/03 08:39:58 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/03 10:46:17 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ int	is_invalid_value(char *string)
 
 	i = -1;
 	is_only_zero = 1;
-	while (string[i++])
+	while (string[++i])
 	{
 		if (string[i] < '0' || string[i] > '9')
 			return (1);
 		if (string[i] != '0')
 			is_only_zero = 0;
 	}
-	if (!is_only_zero && strlen(string) > 5)
+	if (!is_only_zero && strlen(string) > 10)
 	{
-		if (atoi(string) == 0)
+		printf("%d\n", atoi(string));
+		if (atoi(string) <= 0)
 			return (1);
 	}
 	return (0);
@@ -40,9 +41,9 @@ int	validate_args(char **argv)
 	int	i;
 
 	i = 0;
-	while (i++)
+	while (++i)
 	{
-		if (i == 9)
+		if (i == 8)
 			break ;
 		if (is_invalid_value(argv[i]))
 			return (0);
@@ -58,7 +59,7 @@ t_args	*get_args(int argc, char **argv)
 	args_ptr = &args;
 	if (argc != 9)
 		return (NULL);
-	if (validate_args(argv))
+	if (!validate_args(argv))
 	{
 		printf("Arguments error: Number arguments must be <2147483647, >=0.\n");
 		return (NULL);
