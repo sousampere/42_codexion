@@ -6,7 +6,7 @@
 #    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/03 07:15:47 by gtourdia         ###   ########.fr        #
+#    Updated: 2026/04/03 08:44:55 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ GITHUB=https://github.com/sousampere/
 NAME=codexion
 COMPILER=cc
 FLAGS=-Wall -Wextra -Werror -pthread
-DIR=coders
-C_FILES=codexion.c
+C_FILES=coders/codexion.c coders/parsing.c
+H_FILES=coders/codexion.h
 
 
 # COLORS
@@ -28,9 +28,6 @@ YELLOW=\033[0;33m
 CYAN=\033[0;36m
 GREEN=\033[0;32m
 RESET=\033[0m
-
-all: $(NAME)
-	$(COMPILER) $(DIR)/$(C_FILES) $(FLAGS) -o codexion
 
 $(NAME):
 	@printf "\033[2J\033[H"
@@ -51,13 +48,17 @@ $(NAME):
 	@printf "\033[8;66H║"
 	@printf "\033[9;80H\n"
 	@printf "$(CYAN)[Installation]$(RESET) ➡️  Compiling file...\n"
-	$(COMPILER) $(DIR)/$(C_FILES) $(FLAGS) -o codexion
+	$(COMPILER) $(C_FILES) $(H_FILES) $(FLAGS)
+
+all: $(NAME)
+
+exe: $(NAME)
+	./a.out
 
 
 
-
-
-# clean:
+clean:
+	rm -rf ./a.out
 	
 # fclean: clean
 
