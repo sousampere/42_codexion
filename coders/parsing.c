@@ -18,7 +18,6 @@ int	is_invalid_value(char *string)
 	int	i;
 
 	i = -1;
-	
 	while (string[++i])
 	{
 		if (string[i] < '0' || string[i] > '9')
