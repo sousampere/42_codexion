@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:18:52 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/03 14:17:59 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/03 22:57:14 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,17 @@
 int	is_invalid_value(char *string)
 {
 	int	i;
-	int	is_only_zero;
 
 	i = -1;
-	is_only_zero = 1;
+	
 	while (string[++i])
 	{
 		if (string[i] < '0' || string[i] > '9')
 			return (1);
-		if (string[i] != '0')
-			is_only_zero = 0;
 	}
-	if (strlen(string) > 9 && string[9] >= '8')
+	if (strlen(string) > 10)
+		return (1);
+	if (strlen(string) >= 9 && string[9] >= '8')
 	{
 		string[9] = '\0';
 		if (atoi(string) >= 214748364)
