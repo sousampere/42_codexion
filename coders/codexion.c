@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 05:42:19 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 10:49:14 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 11:32:33 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,41 @@ t_coder	*create_coders(t_args *args)
 	return (coders);
 }
 
+void	*routine(void *coder)
+{
+	t_coder	*current_coder;
+
+	current_coder = (t_coder *) coder;
+	printf("coder %d coding...\n", current_coder->coder_id);
+	return (NULL);
+}
+
+int	start_simulation(t_args *args)
+{
+	t_coder		*coders;
+	pthread_t	*threads;
+	int			i;
+
+	coders = create_coders(args);
+	if (!coders)
+		return (printf("Failed to allocate memory.\n"), 1);
+	threads = malloc(sizeof(pthread_t) * args->nb_coders);
+	i = 0;
+	while (i < args->nb_coders)
+	{
+		pthread_create(&threads[i], NULL, &routine, &coders[i]);
+		pthread_join(threads[i], NULL);
+		i++;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_args	*args;
-	t_coder	*coders;
 
 	args = get_args(argc, argv);
 	if (!args)
 		return (printf("Invalid arguments.\n"), 1);
-	coders = create_coders(args);
-	if (!coders)
-		return (printf("Failed to allocate memory.\n"), 1);
+	return (start_simulation(args));
 }
