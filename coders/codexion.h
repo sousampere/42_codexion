@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 19:57:52 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 20:31:25 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_coder
 
 typedef struct s_manager
 {
-	t_dongle	*dongles; // list of (nb_coders) dongles
 	t_coder		*coders; // list of (nb_coders) coders
 	t_args		*args; // pointer to args struct
 }	t_manager;
@@ -65,6 +64,8 @@ t_args	*get_args(int argc, char **argv);
 void	give_dongles(t_coder *coders, t_args *args);
 t_coder	*create_coders(t_args *args);
 void	give_dongles(t_coder *coders, t_args *args);
+void	free_all(t_manager *manager);
+t_manager	*create_manager(int argc, char **argv);
 
 // Misc
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -74,7 +75,5 @@ void	debug_args(t_args *args);
 // Simulation
 int		start_simulation(t_args *args);
 void	*routine(void *coder);
-
-
 
 #endif // !CODEXION_H

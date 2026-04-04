@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:52:38 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/04 19:53:49 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 20:28:05 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,25 @@ void	*routine(void *coder)
 	return (NULL);
 }
 
-int	start_simulation(t_args *args)
-{
-	t_coder		*coders;
-	pthread_t	*threads;
-	int			i;
+// int	start_simulation(t_args *args)
+// {
+// 	t_coder		*coders;
+// 	pthread_t	*threads;
+// 	int			i;
 
-	coders = create_coders(args);
-	if (!coders)
-		return (printf("Failed to allocate memory.\n"), 1);
-	threads = malloc(sizeof(pthread_t) * args->nb_coders);
-	i = 0;
-	give_dongles(coders, args);
-	while (i < args->nb_coders)
-	{
-		pthread_create(&threads[i], NULL, &routine, &coders[i]);
-		pthread_join(threads[i], NULL);
-		i++;
-	}
-	free(threads);
-	free(coders);
-	free(args);
-	return (0);
-}
+// 	if (!coders)
+// 		return (printf("Failed to allocate memory.\n"), 1);
+// 	threads = malloc(sizeof(pthread_t) * args->nb_coders);
+// 	i = 0;
+// 	give_dongles(coders, args);
+// 	while (i < args->nb_coders)
+// 	{
+// 		pthread_create(&threads[i], NULL, &routine, &coders[i]);
+// 		pthread_join(threads[i], NULL);
+// 		i++;
+// 	}
+// 	free(threads);
+// 	free(coders);
+// 	free(args);
+// 	return (0);
+// }

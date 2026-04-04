@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 05:42:19 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 19:53:40 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 20:31:36 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	t_args	*args;
+	t_manager	*manager;
 
-	args = get_args(argc, argv);
-	if (!args)
-		return (printf("Invalid arguments.\n"), 1);
-	int i = start_simulation(args);
-	// system("leaks a.out");
-	return (i);
+	manager = create_manager(argc, argv);
+	free_all(manager);
+	return (0);
 }

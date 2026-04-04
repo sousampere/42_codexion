@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:18:52 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 19:58:49 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 20:24:35 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ t_args	*get_args(int argc, char **argv)
 
 	args_ptr = malloc(sizeof(t_args));
 	if (!args_ptr)
-		return (NULL);
+		return (args_ptr);
 	if (argc != 9)
-		return (NULL);
+		return (args_ptr);
 	if (!validate_args(argv))
-		return (NULL);
+		return (args_ptr);
 	args_ptr->nb_coders = atoi(argv[1]);
 	args_ptr->burnout_time = atoi(argv[2]);
 	args_ptr->compile_time = atoi(argv[3]);
@@ -69,7 +69,7 @@ t_args	*get_args(int argc, char **argv)
 	args_ptr->dongle_cooldown = atoi(argv[7]);
 	args_ptr->scheduler = argv[8];
 	if (!(strcmp(argv[8], "fifo") == 0) && !(strcmp(argv[8], "edf") == 0))
-		return (NULL);
+		return (args_ptr);
 	args_ptr->scheduler = argv[8];
 	return (args_ptr);
 }

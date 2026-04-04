@@ -6,11 +6,19 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/04 19:52:14 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 20:31:21 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../codexion.h"
+
+void	free_all(t_manager *manager)
+{
+	free(manager->args);
+	// MUST IMPLEMENT FREEING DONGLES
+	free(manager->coders);
+	free(manager);
+}
 
 void	give_dongles(t_coder *coders, t_args *args)
 {
@@ -41,6 +49,8 @@ t_coder	*create_coders(t_args *args)
 	t_coder	*coders;
 
 	coders = malloc(sizeof(t_coder) * args->nb_coders);
+	if (!coders)
+		return (NULL);
 	i = 1;
 	while (i <= args->nb_coders)
 	{
@@ -50,4 +60,31 @@ t_coder	*create_coders(t_args *args)
 		i++;
 	}
 	return (coders);
+}
+
+t_manager	*create_manager(int argc, char **argv)
+{
+	t_args 		*args;
+	t_coder 	*coders;
+	t_manager	*manager;
+
+	args = get_args(argc, argv);
+	if (!args)
+	{
+		printf("Invalid arguments.\n");
+		free(args);
+		return (NULL);
+	}
+	coders = create_coders(args);
+	if (!coders)
+	{
+		printf("Failed to allocate memory to create coders.\n");
+		return (NULL);
+	}
+	manager = malloc(sizeof(t_manager));
+	if (!manager)
+		return (NULL);
+	manager->args = args;
+	manager->coders = coders;
+	return (manager);
 }
