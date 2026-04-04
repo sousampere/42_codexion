@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:18:52 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/03 22:57:14 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/04 09:03:56 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ int	validate_args(char **argv)
 t_args	*get_args(int argc, char **argv)
 {
 	t_args	*args_ptr;
-	t_args	args;
 
-	args_ptr = &args;
+	args_ptr = malloc(sizeof(t_args));
+	if (!args_ptr)
+		return (NULL);
 	if (argc != 9)
 		return (NULL);
 	if (!validate_args(argv))
@@ -70,5 +71,6 @@ t_args	*get_args(int argc, char **argv)
 	if (!(strcmp(argv[8], "fifo") == 0) && !(strcmp(argv[8], "edf") == 0))
 		return (NULL);
 	args_ptr->scheduler = argv[8];
+	printf("%s\n\n", args_ptr->scheduler);
 	return (args_ptr);
 }

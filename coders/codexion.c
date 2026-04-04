@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   codexion.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 05:42:19 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/03 14:18:09 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/04 09:00:49 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@ int	main(int argc, char **argv)
 	args = get_args(argc, argv);
 	if (!args)
 		return (printf("Invalid arguments.\n"), 1);
-	printf("%d", args->dongle_cooldown);
+	printf("%s\n", args->scheduler);
+	debug_args(args);
+	free(args);
 }

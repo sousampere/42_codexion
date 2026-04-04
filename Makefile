@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
+#    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/03 22:51:43 by gtourdia         ###   ########.fr        #
+#    Updated: 2026/04/04 09:07:54 by gaspard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ GITHUB=https://github.com/sousampere/
 NAME=codexion
 COMPILER=cc
 FLAGS=-Wall -Wextra -Werror -pthread -g3
-C_FILES=coders/codexion.c coders/parsing.c
+C_FILES=coders/codexion.c\
+		coders/parsing.c\
+		coders/debug.c
 # H_FILES=coders/codexion.h
 
 
@@ -28,6 +30,8 @@ YELLOW=\033[0;33m
 CYAN=\033[0;36m
 GREEN=\033[0;32m
 RESET=\033[0m
+
+all: $(NAME)
 
 $(NAME):
 	@printf "\033[2J\033[H"
@@ -49,12 +53,14 @@ $(NAME):
 	@printf "\033[9;80H\n"
 	@printf "$(CYAN)[Installation]$(RESET) ➡️  Compiling file...\n"
 	$(COMPILER) $(C_FILES) $(FLAGS)
-
-all: $(NAME)
+	@printf "$(CYAN)[Clean]$(RESET) ➡️  Cleaning useless folders...\n"
+# 	rm -rf a.out.dSYM/
 
 exe: $(NAME)
 	./a.out
 
+run: $(NAME)
+	./a.out 1 1 1 1 1 1 1 edf
 
 
 clean:
