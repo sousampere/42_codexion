@@ -6,7 +6,7 @@
 #    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/04 10:43:00 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/04 19:58:33 by gaspard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,17 @@ NAME=codexion
 COMPILER=cc
 FLAGS=-Wall -Wextra -Werror -pthread -g3
 C_FILES=coders/codexion.c\
-		coders/parsing.c\
-		coders/debug.c
+		\
+		coders/preparation/parsing.c\
+		coders/preparation/creation.c\
+		\
+		coders/misc/calloc.c\
+		coders/misc/time_conversion.c\
+		coders/misc/debug.c\
+		\
+		coders/simulation/actions.c\
+		coders/simulation/routine.c\
+		
 # H_FILES=coders/codexion.h
 
 

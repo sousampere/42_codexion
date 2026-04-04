@@ -1,25 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   codexion.c                                         :+:      :+:    :+:   */
+/*   create_heap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 05:42:19 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 19:53:40 by gaspard          ###   ########.fr       */
+/*   Created: 2026/04/04 13:41:38 by gaspard           #+#    #+#             */
+/*   Updated: 2026/04/04 18:32:25 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "codexion.h"
-
-int	main(int argc, char **argv)
-{
-	t_args	*args;
-
-	args = get_args(argc, argv);
-	if (!args)
-		return (printf("Invalid arguments.\n"), 1);
-	int i = start_simulation(args);
-	// system("leaks a.out");
-	return (i);
-}

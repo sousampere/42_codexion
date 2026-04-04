@@ -6,11 +6,11 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 08:39:36 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/04 09:20:07 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 19:58:45 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "codexion.h"
+#include "../codexion.h"
 
 void	debug_args(t_args*args)
 {

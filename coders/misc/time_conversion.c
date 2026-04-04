@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   codexion.c                                         :+:      :+:    :+:   */
+/*   time_conversion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 05:42:19 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 19:53:40 by gaspard          ###   ########.fr       */
+/*   Created: 2026/04/04 12:59:13 by gaspard           #+#    #+#             */
+/*   Updated: 2026/04/04 13:04:07 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "codexion.h"
+#include "../codexion.h"
 
-int	main(int argc, char **argv)
+long	get_time_in_ms(void)
 {
-	t_args	*args;
+	// Return the current timestamp in ms
+	struct timeval	time;
 
-	args = get_args(argc, argv);
-	if (!args)
-		return (printf("Invalid arguments.\n"), 1);
-	int i = start_simulation(args);
-	// system("leaks a.out");
-	return (i);
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }

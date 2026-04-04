@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   codexion.c                                         :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 05:42:19 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 19:53:40 by gaspard          ###   ########.fr       */
+/*   Created: 2026/04/04 12:24:55 by gaspard           #+#    #+#             */
+/*   Updated: 2026/04/04 12:30:54 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "codexion.h"
+#include "../codexion.h"
 
-int	main(int argc, char **argv)
+void	ft_bzero(void *dst, size_t n)
 {
-	t_args	*args;
+	size_t	i;
+	char	*new_dst;
 
-	args = get_args(argc, argv);
-	if (!args)
-		return (printf("Invalid arguments.\n"), 1);
-	int i = start_simulation(args);
-	// system("leaks a.out");
-	return (i);
+	i = 0;
+	new_dst = dst;
+	while (i < n)
+	{
+		new_dst[i] = '\0';
+		i++;
+	}
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*alloc;
+
+	if (size != 0 && (nmemb * size) / size != nmemb)
+		return (NULL);
+	alloc = malloc(nmemb * size);
+	if (!alloc)
+		return (NULL);
+	ft_bzero(alloc, size * nmemb);
+	return (alloc);
 }

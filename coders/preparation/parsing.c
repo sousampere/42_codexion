@@ -6,11 +6,11 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:18:52 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 10:46:11 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 19:58:49 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "codexion.h"
+#include "../codexion.h"
 
 // Overflow, negative, non-integer and non-digit protection
 int	is_invalid_value(char *string)
