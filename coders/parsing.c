@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:18:52 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 09:03:56 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 10:46:11 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ t_args	*get_args(int argc, char **argv)
 	if (!(strcmp(argv[8], "fifo") == 0) && !(strcmp(argv[8], "edf") == 0))
 		return (NULL);
 	args_ptr->scheduler = argv[8];
-	printf("%s\n\n", args_ptr->scheduler);
 	return (args_ptr);
 }

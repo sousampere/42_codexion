@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/04 08:43:05 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/04 10:49:41 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,14 @@ typedef struct s_args
 	char	*scheduler; // fifo or edf
 }	t_args;
 
+typedef struct s_coder
+{
+	int		coder_id;
+	int		time_to_burnout;
+	int		nb_compiles;
+}	t_coder;
+
 t_args	*get_args(int argc, char **argv);
-void    debug_args(t_args *args);
+void	debug_args(t_args *args);
 
 #endif // !CODEXION_H
