@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/07 13:10:46 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/07 13:18:31 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,20 @@ typedef struct s_manager
 
 
 // Preparation
-t_args	*get_args(int argc, char **argv);
-void	give_dongles(t_coder *coders, t_args *args);
-t_coder	*create_coders(t_args *args);
-void	give_dongles(t_coder *coders, t_args *args);
-void	free_all(t_manager *manager);
+t_args		*get_args(int argc, char **argv);
+void		give_dongles(t_coder *coders, t_args *args);
+t_coder		*create_coders(t_args *args);
+void		give_dongles(t_coder *coders, t_args *args);
+void		free_all(t_manager *manager);
 t_manager	*create_manager(int argc, char **argv);
 
 // Misc
-void	*ft_calloc(size_t nmemb, size_t size);
-long	get_time_in_ms(void);
-void	debug_args(t_args *args);
+void		*ft_calloc(size_t nmemb, size_t size);
+long		get_time_in_ms(void);
+void		debug_args(t_args *args);
 
 // Simulation
-int		start_simulation(t_args *args);
-void	*routine(void *coder);
+int			start_simulation(t_manager *mng);
+void		*routine(void *coder);
 
 #endif // !CODEXION_H

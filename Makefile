@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
+#    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/04 19:58:33 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/07 13:19:24 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ exe: $(NAME)
 	./a.out
 
 run: $(NAME)
-	./a.out 5 1 1 1 1 1 1 edf
+	./a.out 8 1 1 1 1 1 1 edf
 
 
 clean:

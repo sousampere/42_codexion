@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/06 19:01:51 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/07 13:21:16 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,6 @@ void	free_all(t_manager *manager)
 	// MUST IMPLEMENT FREEING DONGLES
 	free(manager->coders);
 	free(manager);
-}
-
-void	give_dongles(t_coder *coders, t_args *args)
-{
-	int				i;
-	t_dongle		*dongles;
-	long			current_time;
-
-	i = 0;
-	dongles = ft_calloc(args->nb_coders, sizeof(t_dongle)); // Create n dongles memory place
-	current_time = get_time_in_ms();
-	while (i < args->nb_coders - 1)
-	{
-		dongles[i].cooldown = current_time;
-		dongles[i].dongle_id = i + 1;
-		coders[i].left_dongle = &dongles[i];
-		coders[i].right_dongle = &dongles[i + 1];
-		i++;
-	}
-	dongles[i].cooldown = current_time;
-	dongles[i].dongle_id = i + 1;
-	coders[i].left_dongle = &dongles[i];
-	coders[i].right_dongle = &dongles[0];
 }
 
 t_coder	*create_coders(t_args *args)
