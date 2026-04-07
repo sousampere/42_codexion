@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/07 13:18:31 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/07 16:52:05 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_dongle
 	pthread_mutex_t	mutex; // lock/unlock the right to use it
 	pthread_cond_t	condition; // wait on that condition to broadcast
 	int				is_in_use; // 1 if a coder is using it
-	t_coder			*heap;
+	t_coder			*heap[2];
 }	t_dongle;
 
 typedef struct s_manager
@@ -65,7 +65,6 @@ typedef struct s_manager
 
 // Preparation
 t_args		*get_args(int argc, char **argv);
-void		give_dongles(t_coder *coders, t_args *args);
 t_coder		*create_coders(t_args *args);
 void		give_dongles(t_coder *coders, t_args *args);
 void		free_all(t_manager *manager);

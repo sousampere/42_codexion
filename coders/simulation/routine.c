@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:52:38 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/07 13:18:58 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/07 16:52:10 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	start_simulation(t_manager *mng)
 
 	threads = malloc(sizeof(pthread_t) * mng->args->nb_coders);
 	i = 0;
-	give_dongles(mng->coders, mng->args);
 	while (i < mng->args->nb_coders)
 	{
 		pthread_create(&threads[i], NULL, &routine, &mng->coders[i]);
