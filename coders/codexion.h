@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/07 16:52:05 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:25:17 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_manager
 // Preparation
 t_args		*get_args(int argc, char **argv);
 t_coder		*create_coders(t_args *args);
-void		give_dongles(t_coder *coders, t_args *args);
+void		give_dongles(t_manager *mng);
 void		free_all(t_manager *manager);
 t_manager	*create_manager(int argc, char **argv);
 

@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   codexion.c                                         :+:      :+:    :+:   */
+/*   monitor_thread.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 05:42:19 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/07 17:43:12 by gtourdia         ###   ########.fr       */
+/*   Created: 2026/04/07 17:45:37 by gtourdia          #+#    #+#             */
+/*   Updated: 2026/04/07 17:55:05 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "codexion.h"
+#include "../codexion.h"
 
-int	main(int argc, char **argv)
+int	monitor_burnout(t_manager	*mng)
 {
-	t_manager	*manager;
+	int		i;
 
-	manager = create_manager(argc, argv);
-	start_simulation(manager);
-	free_all(manager);
-	sleep(1);
-	return (0);
+	i = 0;
+	while (i < mng->args->nb_coders)
+	{
+		if (mng->coders[i].time_to_burnout < get_time_in_ms())
+		{
+			print("%d %i burned out", get_time_in_ms(), mng->coders[i].coder_id);
+			free_all(mng);
+			return (0);
+		}
+		i++;
+		if (i == mng->args->nb_coders)
+			i = 0;
+	}
 }

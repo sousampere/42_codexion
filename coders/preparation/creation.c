@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/07 13:21:16 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:32:33 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,32 @@ t_coder	*create_coders(t_args *args)
 	return (coders);
 }
 
+void	give_dongles(t_manager *mng)
+{
+	int				i;
+	t_dongle		*dongles;
+	long			current_time;
+
+	i = 0;
+	// Create n dongles memory place
+	dongles = ft_calloc(mng->args->nb_coders, sizeof(t_dongle));
+	if (!dongles)
+		return ;
+	current_time = get_time_in_ms();
+	while (i < mng->args->nb_coders - 1)
+	{
+		dongles[i].cooldown = current_time;
+		dongles[i].dongle_id = i + 1;
+		mng->coders[i].left_dongle = &dongles[i];
+		mng->coders[i].right_dongle = &dongles[i + 1];
+		i++;
+	}
+	dongles[i].cooldown = current_time;
+	dongles[i].dongle_id = i + 1;
+	mng->coders[i].left_dongle = &dongles[i];
+	mng->coders[i].right_dongle = &dongles[0];
+}
+
 t_manager	*create_manager(int argc, char **argv)
 {
 	t_args 		*args;
@@ -63,5 +89,6 @@ t_manager	*create_manager(int argc, char **argv)
 		return (NULL);
 	manager->args = args;
 	manager->coders = coders;
+	give_dongles(manager);
 	return (manager);
 }

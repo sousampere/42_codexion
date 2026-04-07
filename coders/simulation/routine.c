@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:52:38 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/07 16:52:10 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:44:13 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void	*routine(void *coder)
 	t_coder	*current_coder;
 
 	current_coder = (t_coder *) coder;
-	printf("coder %d coding...\n", current_coder->coder_id);
-	printf("coder %d has left_dongle of time %ld...\n", current_coder->coder_id, current_coder->left_dongle->cooldown);
-	printf("coder %d has right_dongle of time %ld...\n", current_coder->coder_id, current_coder->right_dongle->cooldown);
+	
+	printf("coder %d coding with %d...\n", current_coder->coder_id, current_coder->left_dongle->dongle_id);
+	printf("coder %d coding with %d...\n", current_coder->coder_id, current_coder->right_dongle->dongle_id);
+	printf("====\n");
 	return (NULL);
 }
 
@@ -32,8 +33,9 @@ int	start_simulation(t_manager *mng)
 	i = 0;
 	while (i < mng->args->nb_coders)
 	{
+		// start thread
 		pthread_create(&threads[i], NULL, &routine, &mng->coders[i]);
-		pthread_join(threads[i], NULL);
+		// pthread_join(threads[i], NULL);
 		i++;
 	}
 	return (0);
