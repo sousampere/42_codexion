@@ -6,18 +6,18 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:52:38 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/08 10:37:40 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/08 11:45:37 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../codexion.h"
 
-void	*routine(void *coder)
+void	*routine(void *coder, t_manager *mng)
 {
 	t_coder	*current_coder;
 
 	current_coder = (t_coder *) coder;
-	pick_dongle(coder);
+	pick_left_dongle(coder, mng);
 	printf("coder %d coding with %d...\n", current_coder->coder_id, current_coder->left_dongle->dongle_id);
 	printf("coder %d coding with %d...\n", current_coder->coder_id, current_coder->right_dongle->dongle_id);
 	printf("====\n");
@@ -34,7 +34,7 @@ int	start_simulation(t_manager *mng)
 	while (i < mng->args->nb_coders)
 	{
 		// start thread
-		pthread_create(&threads[i], NULL, &routine, &mng->coders[i]);
+		pthread_create(&threads[i], NULL, &routine, &mng->coders[i], mng);
 		// pthread_join(threads[i], NULL);
 		i++;
 	}

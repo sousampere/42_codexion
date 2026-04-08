@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/08 10:31:16 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/08 11:41:30 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ t_manager	*create_manager(int argc, char **argv)
 		return (NULL);
 	manager->args = args;
 	manager->coders = coders;
+	manager->start_timestamp = get_time_in_ms();
 	give_dongles(manager);
 	return (manager);
 }

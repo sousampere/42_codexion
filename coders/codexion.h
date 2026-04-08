@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/08 10:35:56 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/08 11:45:18 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_manager
 {
 	t_coder		*coders; // list of (nb_coders) coders
 	t_args		*args; // pointer to args struct
+	long		start_timestamp; // timestamp in us : start of the simulation
 }	t_manager;
 
 
@@ -74,11 +75,13 @@ t_manager	*create_manager(int argc, char **argv);
 void		*ft_calloc(size_t nmemb, size_t size);
 long		get_time_in_ms(void);
 void		debug_args(t_args *args);
+long		get_rel_time(t_manager *mng);
+
 
 // Simulation
 int			start_simulation(t_manager *mng);
 void		*routine(void *coder);
-void		pick_dongle(t_coder *coder);
+void		pick_left_dongle(t_coder *coder, t_manager *mng);
 
 
 #endif // !CODEXION_H
