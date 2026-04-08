@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/07 17:32:33 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/08 10:31:16 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 void	free_all(t_manager *manager)
 {
-	free(manager->args);
+	int	i;
+	
+	i = -1;
+	while (++i < manager->args->nb_coders)
+		pthread_mutex_destroy(&manager->coders[i].left_dongle->mutex);
 	// MUST IMPLEMENT FREEING DONGLES
 	free(manager->coders);
+	free(manager->args);
 	free(manager);
 }
 
@@ -57,12 +62,14 @@ void	give_dongles(t_manager *mng)
 		dongles[i].dongle_id = i + 1;
 		mng->coders[i].left_dongle = &dongles[i];
 		mng->coders[i].right_dongle = &dongles[i + 1];
+		pthread_mutex_init(&dongles[i].mutex, NULL);
 		i++;
 	}
 	dongles[i].cooldown = current_time;
 	dongles[i].dongle_id = i + 1;
 	mng->coders[i].left_dongle = &dongles[i];
 	mng->coders[i].right_dongle = &dongles[0];
+	pthread_mutex_init(&dongles[i].mutex, NULL);
 }
 
 t_manager	*create_manager(int argc, char **argv)

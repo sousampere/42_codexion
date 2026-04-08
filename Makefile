@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
+#    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/07 13:19:24 by gtourdia         ###   ########.fr        #
+#    Updated: 2026/04/07 19:12:19 by gaspard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ C_FILES=coders/codexion.c\
 		\
 		coders/simulation/actions.c\
 		coders/simulation/routine.c\
-		
+
 # H_FILES=coders/codexion.h
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/07 17:25:17 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/08 10:35:56 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ void		debug_args(t_args *args);
 // Simulation
 int			start_simulation(t_manager *mng);
 void		*routine(void *coder);
+void		pick_dongle(t_coder *coder);
+
 
 #endif // !CODEXION_H
