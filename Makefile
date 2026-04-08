@@ -6,7 +6,7 @@
 #    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/07 19:12:19 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/08 16:17:55 by gaspard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,16 +20,14 @@ NAME=codexion
 COMPILER=cc
 FLAGS=-Wall -Wextra -Werror -pthread -g3
 C_FILES=coders/codexion.c\
+		coders/time.c\
+		coders/heap_moves.c\
 		\
 		coders/preparation/parsing.c\
-		coders/preparation/creation.c\
+		coders/preparation/init.c\
 		\
-		coders/misc/calloc.c\
-		coders/misc/time_conversion.c\
-		coders/misc/debug.c\
-		\
-		coders/simulation/actions.c\
-		coders/simulation/routine.c\
+		coders/simulation/simulation.c\
+		coders/simulation/monitoring.c\
 
 # H_FILES=coders/codexion.h
 
@@ -69,7 +67,7 @@ exe: $(NAME)
 	./a.out
 
 run: $(NAME)
-	./a.out 8 1 1 1 1 1 1 edf
+	./a.out 8 500 1 1 1 1 1 edf
 
 
 clean:

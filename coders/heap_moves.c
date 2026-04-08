@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heap_push.c                                        :+:      :+:    :+:   */
+/*   heap_moves.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/07 16:52:22 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/07 16:58:21 by gtourdia         ###   ########.fr       */
+/*   Created: 2026/04/07 16:26:24 by gtourdia          #+#    #+#             */
+/*   Updated: 2026/04/08 14:51:00 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../codexion.h"
+#include "codexion.h"
+
+t_coder	*heap_pop(t_dongle	*dongle)
+{
+	t_coder	*temp;
+
+	if (dongle->heap[0] == NULL)
+		return (NULL);
+	temp = dongle->heap[0];
+	dongle->heap[0] = dongle->heap[1];
+	dongle->heap[1] = NULL;
+	return (temp);
+}
 
 void	heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng)
 {

@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/08 11:41:30 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/08 14:51:51 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	give_dongles(t_manager *mng)
 
 	i = 0;
 	// Create n dongles memory place
-	dongles = ft_calloc(mng->args->nb_coders, sizeof(t_dongle));
+	dongles = malloc(mng->args->nb_coders * sizeof(t_dongle));
 	if (!dongles)
 		return ;
 	current_time = get_time_in_ms();
