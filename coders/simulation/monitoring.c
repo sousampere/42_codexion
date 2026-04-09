@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:03:54 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/08 16:14:48 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/08 16:22:51 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*monitor_routine(void *manager)
 			mng->is_burn_out = 1;
 			return (NULL);
 		}
-		if (mng->coders[i].nb_compiles != mng->args->nb_compiles)
+		if (mng->coders[i].nb_compiles < mng->args->nb_compiles)
 			is_every_coder_done = 0;
 		if (i == mng->args->nb_coders - 1)
 		{
@@ -53,5 +53,7 @@ int	monitor_burnout(t_manager *mng)
 
 	pthread_create(&monitoring, NULL, &monitor_routine, mng);
 	pthread_join(monitoring, NULL);
+	if (mng->is_burn_out == 0)
+		printf("== end of simulation ==\n");
 	return (mng->is_burn_out);
 }
