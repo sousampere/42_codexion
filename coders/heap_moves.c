@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 16:26:24 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/08 14:51:00 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/09 14:00:58 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,12 @@ void	heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng)
 			}
 		}
 	}
+}
+
+void	heap_rm(t_coder *coder)
+{
+	if (coder->left_dongle->heap[0]->coder_id == coder->coder_id)
+		heap_pop(coder->left_dongle);
+	if (coder->right_dongle->heap[0]->coder_id == coder->coder_id)
+		heap_pop(coder->right_dongle);
 }

@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/08 15:44:41 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/09 14:19:16 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ typedef struct s_manager
 	int			is_burn_out; // 1 if the program exit with a burn-out, 0 else
 }	t_manager;
 
+typedef struct s_routine_arg
+{
+	t_coder		*coder;
+	t_manager	*manager;
+}	t_routine_arg;
+
 
 // Preparation
 t_args		*get_args(int argc, char **argv);
@@ -76,8 +82,15 @@ t_manager	*create_manager(int argc, char **argv);
 long		get_time_in_ms(void);
 long		get_rel_time(t_manager *mng);
 
+// Heap
+void		heap_rm(t_coder *coder);
+
 // Simulation
 int			monitor_burnout(t_manager *mng);
-
+void		refactor(t_coder *coder, t_manager *mng);
+void		compile(t_coder *coder, t_manager *mng);
+void		take_dongles(t_coder *coder, t_manager *mng);
+void		wait_for_dongles(t_coder *coder, t_manager *mng);
+int			start_simulation(t_manager *mng);
 
 #endif // !CODEXION_H

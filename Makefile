@@ -6,7 +6,7 @@
 #    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/08 16:17:55 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/09 14:01:36 by gaspard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ C_FILES=coders/codexion.c\
 		\
 		coders/simulation/simulation.c\
 		coders/simulation/monitoring.c\
+		coders/simulation/coder_actions.c\
+		
 
 # H_FILES=coders/codexion.h
 
