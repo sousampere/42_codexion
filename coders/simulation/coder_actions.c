@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   coder_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 12:54:51 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 10:41:15 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:35:40 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ void	debug(t_coder *coder, t_manager *mng)
 
 void	refactor(t_coder *coder, t_manager *mng)
 {
+	printf("Printting refactor\n");
 	print(coder, mng, 3);
+	printf("Printed refactor\n");
 	usleep(mng->args->refactor_time * 1000);
+	printf("slept\n");
 }
 
 void	take_dongles(t_coder *coder, t_manager *mng)
@@ -58,11 +61,20 @@ void	wait_for_dongles(t_coder *coder, t_manager *mng)
 {
 	while (1)
 	{
+		// printf("%d %d %ld %ld %ld \n",
+		// 	coder->left_dongle->is_in_use,
+		// 	coder->right_dongle->is_in_use,
+		// 	(long)coder->left_dongle->cooldown,
+		// 	(long)coder->right_dongle->cooldown,
+		// 	get_rel_time(mng));
+		
+		
 		if (coder->left_dongle->is_in_use == 0
 			&& coder->right_dongle->is_in_use == 0
 			&& (long)coder->left_dongle->cooldown <= get_rel_time(mng)
 			&& (long)coder->right_dongle->cooldown <= get_rel_time(mng))
 		{
+			printf("Took dongles for comp %d\n", coder->nb_compiles);
 			take_dongles(coder, mng);
 			return ;
 		}

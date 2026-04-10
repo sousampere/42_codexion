@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:47:38 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 10:44:21 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 18:34:30 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ void	*routine(void *args)
 	while (arg->coder->time_to_burnout > get_rel_time(arg->manager)
 		&& arg->coder->nb_compiles < arg->manager->args->nb_compiles)
 	{
+		printf("waiting...\n");
 		wait_for_dongles(arg->coder, arg->manager);
+		printf("compiling...\n");
 		compile(arg->coder, arg->manager);
+		printf("debugging...\n");
 		debug(arg->coder, arg->manager);
+		printf("refactoring...\n");
 		refactor(arg->coder, arg->manager);
 	}
 	return (NULL);
