@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 12:54:51 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 09:07:55 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:04:32 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	release_dongles(t_coder *coder, t_manager *mng)
 
 void	compile(t_coder *coder, t_manager *mng)
 {
-	printf("%ld %d is compiling\n", get_rel_time(mng), coder->coder_id);
+	print(coder, mng, 2);
+	// printf("%ld %d is compiling\n", get_rel_time(mng), coder->coder_id);
 	coder->time_to_burnout = get_rel_time(mng) + mng->args->burnout_time;
 	usleep(mng->args->compile_time * 1000);
 	coder->nb_compiles += 1;
@@ -35,7 +36,7 @@ void	compile(t_coder *coder, t_manager *mng)
 
 void	refactor(t_coder *coder, t_manager *mng)
 {
-	printf("%ld %d is refactoring\n", get_rel_time(mng), coder->coder_id);
+	print(coder, mng, 3);
 	usleep(mng->args->refactor_time * 1000);
 }
 
@@ -45,8 +46,7 @@ void	take_dongles(t_coder *coder, t_manager *mng)
 	pthread_mutex_lock(&coder->right_dongle->mutex);
 	coder->left_dongle->is_in_use = 1;
 	coder->right_dongle->is_in_use = 1;
-	printf("%ld %d has taken a dongle\n", get_rel_time(mng), coder->coder_id);
-	printf("%ld %d has taken a dongle\n", get_rel_time(mng), coder->coder_id);
+	print(coder, mng, 1);
 }
 
 void	wait_for_dongles(t_coder *coder, t_manager *mng)

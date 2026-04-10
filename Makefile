@@ -6,7 +6,7 @@
 #    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/10 08:56:04 by gtourdia         ###   ########.fr        #
+#    Updated: 2026/04/10 10:01:20 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ C_FILES=coders/codexion.c\
 		coders/simulation/monitoring.c\
 		coders/simulation/coder_actions.c\
 		\
-		coders/misc/free.c
+		coders/misc/free.c\
+		coders/misc/print.c
 		
 
 # H_FILES=coders/codexion.h
@@ -63,7 +64,7 @@ $(NAME):
 	@printf "\033[8;66H║"
 	@printf "\033[9;80H\n"
 	@printf "$(CYAN)[Installation]$(RESET) ➡️  Compiling file...\n"
-	$(COMPILER) $(C_FILES) $(FLAGS)
+	$(COMPILER) $(C_FILES) $(FLAGS) -o $(NAME)
 	@printf "$(CYAN)[Clean]$(RESET) ➡️  Cleaning useless folders...\n"
 # 	rm -rf a.out.dSYM/
 
@@ -71,14 +72,18 @@ exe: $(NAME)
 	./a.out
 
 run: $(NAME)
-	./a.out 8 500 1 1 1 1 1 edf
+	./$(NAME) 200 500 10 10 10 1 10 edf
 
 krun: $(NAME)
-	valgrind --leak-check=full ./a.out 10 3000 200 100 200 10 400 fifo
+	./$(NAME) 200 3000 200 100 200 10 400 fifo
 
 clean:
-	rm -rf ./a.out
-	
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean $(NAME)
+
 # fclean: clean
 
 # re: fclean all

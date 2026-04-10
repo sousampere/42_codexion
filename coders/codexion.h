@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/10 09:09:33 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:00:27 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ typedef struct s_dongle
 
 typedef struct s_manager
 {
-	t_coder		*coders; // list of (nb_coders) coders
-	t_dongle	*dongles; // list of dongles
-	t_args		*args; // pointer to args struct
-	long		start_timestamp; // timestamp in us : start of the simulation
-	int			is_burn_out; // 1 if the program exit with a burn-out, 0 else
+	t_coder			*coders; // list of (nb_coders) coders
+	t_dongle		*dongles; // list of dongles
+	t_args			*args; // pointer to args struct
+	long			start_timestamp; // timestamp in us
+	int				is_burn_out; // 1 if the program exit with a burn-out
+	pthread_mutex_t	print_mutex;
 }	t_manager;
 
 typedef struct s_routine_arg
@@ -82,6 +83,7 @@ t_manager	*create_manager(int argc, char **argv);
 // Misc
 long		get_time_in_ms(void);
 long		get_rel_time(t_manager *mng);
+void		print(t_coder *coder, t_manager *mng, int code);
 
 // Heap
 void		heap_rm(t_coder *coder);
