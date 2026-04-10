@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
+#    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/09 14:01:36 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/10 08:56:04 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ C_FILES=coders/codexion.c\
 		coders/simulation/simulation.c\
 		coders/simulation/monitoring.c\
 		coders/simulation/coder_actions.c\
+		\
+		coders/misc/free.c
 		
 
 # H_FILES=coders/codexion.h
@@ -71,6 +73,8 @@ exe: $(NAME)
 run: $(NAME)
 	./a.out 8 500 1 1 1 1 1 edf
 
+krun: $(NAME)
+	valgrind --leak-check=full ./a.out 10 3000 200 100 200 10 400 fifo
 
 clean:
 	rm -rf ./a.out

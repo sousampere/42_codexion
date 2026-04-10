@@ -1,29 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   creation.c                                         :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/08 14:51:51 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/10 08:55:36 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../codexion.h"
 
-void	free_all(t_manager *manager)
-{
-	int	i;
-	
-	i = -1;
-	while (++i < manager->args->nb_coders)
-		pthread_mutex_destroy(&manager->coders[i].left_dongle->mutex);
-	// MUST IMPLEMENT FREEING DONGLES
-	free(manager->coders);
-	free(manager->args);
-	free(manager);
-}
 
 t_coder	*create_coders(t_args *args)
 {
@@ -47,29 +35,28 @@ t_coder	*create_coders(t_args *args)
 void	give_dongles(t_manager *mng)
 {
 	int				i;
-	t_dongle		*dongles;
 	long			current_time;
 
 	i = 0;
 	// Create n dongles memory place
-	dongles = malloc(mng->args->nb_coders * sizeof(t_dongle));
-	if (!dongles)
+	mng->dongles = malloc(mng->args->nb_coders * sizeof(t_dongle));
+	if (!mng->dongles)
 		return ;
 	current_time = get_time_in_ms();
 	while (i < mng->args->nb_coders - 1)
 	{
-		dongles[i].cooldown = current_time;
-		dongles[i].dongle_id = i + 1;
-		mng->coders[i].left_dongle = &dongles[i];
-		mng->coders[i].right_dongle = &dongles[i + 1];
-		pthread_mutex_init(&dongles[i].mutex, NULL);
+		mng->dongles[i].cooldown = current_time;
+		mng->dongles[i].dongle_id = i + 1;
+		mng->coders[i].left_dongle = &mng->dongles[i];
+		mng->coders[i].right_dongle = &mng->dongles[i + 1];
+		pthread_mutex_init(&mng->dongles[i].mutex, NULL);
 		i++;
 	}
-	dongles[i].cooldown = current_time;
-	dongles[i].dongle_id = i + 1;
-	mng->coders[i].left_dongle = &dongles[i];
-	mng->coders[i].right_dongle = &dongles[0];
-	pthread_mutex_init(&dongles[i].mutex, NULL);
+	mng->dongles[i].cooldown = current_time;
+	mng->dongles[i].dongle_id = i + 1;
+	mng->coders[i].left_dongle = &mng->dongles[i];
+	mng->coders[i].right_dongle = &mng->dongles[0];
+	pthread_mutex_init(&mng->dongles[i].mutex, NULL);
 }
 
 t_manager	*create_manager(int argc, char **argv)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:47:38 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/09 14:23:00 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/09 16:50:57 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ int	start_simulation(t_manager *mng)
 		args[i].coder = &mng->coders[i];
 		args[i].manager = mng;
 		pthread_create(&threads[i], NULL, &routine, &args[i]);
-		// pthread_join(threads[i], NULL);
 		i++;
 	}
+	i = -1;
+	while (++i < mng->args->nb_coders)
+		pthread_join(threads[i], NULL);
+	free(threads);
+	free(args);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:03:54 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/08 16:22:51 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/09 16:22:50 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*monitor_routine(void *manager)
 	{
 		if (mng->coders[i].time_to_burnout <= get_rel_time(mng))
 		{
-			printf("%ld %d burned-out\n", get_rel_time(mng), mng->coders[i].coder_id);
+			printf("%ld %d burned out\n", get_rel_time(mng), mng->coders[i].coder_id);
 			mng->is_burn_out = 1;
 			return (NULL);
 		}

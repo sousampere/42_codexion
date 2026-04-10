@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/09 14:19:16 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/10 08:50:26 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 typedef struct s_dongle	t_dongle; // Pre-declaration
 typedef struct s_coder	t_coder; // Pre-declaration
+typedef struct s_routine_arg t_routine_arg;
 
 typedef struct s_args
 {
@@ -59,6 +60,7 @@ typedef struct s_dongle
 typedef struct s_manager
 {
 	t_coder		*coders; // list of (nb_coders) coders
+	t_dongle	*dongles; // list of dongles
 	t_args		*args; // pointer to args struct
 	long		start_timestamp; // timestamp in us : start of the simulation
 	int			is_burn_out; // 1 if the program exit with a burn-out, 0 else
