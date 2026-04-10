@@ -6,7 +6,7 @@
 #    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/10 10:01:20 by gtourdia         ###   ########.fr        #
+#    Updated: 2026/04/10 11:20:27 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,8 +74,9 @@ exe: $(NAME)
 run: $(NAME)
 	./$(NAME) 200 500 10 10 10 1 10 edf
 
-krun: $(NAME)
-	./$(NAME) 200 3000 200 100 200 10 400 fifo
+krun: re
+	./$(NAME) 3				3000				69			100				200			10				400				fifo
+#             <nb_coders> <burnout-delay> <compile_time> <debug_time> <refactor_time> <nb_compiles> <dongle_cooldown> <scheduler>
 
 clean:
 

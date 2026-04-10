@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/10 10:00:27 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:43:28 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void		compile(t_coder *coder, t_manager *mng);
 void		take_dongles(t_coder *coder, t_manager *mng);
 void		wait_for_dongles(t_coder *coder, t_manager *mng);
 int			start_simulation(t_manager *mng);
+void		debug(t_coder *coder, t_manager *mng);
 
 #endif // !CODEXION_H

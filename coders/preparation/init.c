@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 09:08:18 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:22:20 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	give_dongles(t_manager *mng)
 	mng->dongles = malloc(mng->args->nb_coders * sizeof(t_dongle));
 	if (!mng->dongles)
 		return ;
-	current_time = get_time_in_ms();
+	current_time = get_rel_time(mng);
 	while (i < mng->args->nb_coders - 1)
 	{
 		mng->dongles[i].cooldown = current_time;

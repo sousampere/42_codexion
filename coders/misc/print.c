@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 09:49:31 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/10 10:05:51 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:33:12 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	print(t_coder *coder, t_manager *mng, int code)
 			get_rel_time(mng), coder->coder_id);
 	if (code == 3)
 		printf("\033[0;34m%ld %d is refactoring.\033[0m\n",
+			get_rel_time(mng), coder->coder_id);
+	if (code == 4)
+		printf("\033[0;35m%ld %d is debugging.\033[0m\n",
 			get_rel_time(mng), coder->coder_id);
 	pthread_mutex_unlock(&mng->print_mutex);
 }

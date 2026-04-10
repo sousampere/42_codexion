@@ -6,18 +6,14 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 12:54:51 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 10:04:32 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 10:41:15 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../codexion.h"
 
-void	release_dongles(t_coder *coder, t_manager *mng)
+void	release_dongles(t_coder *coder)
 {
-	coder->left_dongle->cooldown = get_rel_time(mng)
-		+ mng->args->dongle_cooldown;
-	coder->right_dongle->cooldown = get_rel_time(mng)
-		+ mng->args->dongle_cooldown;
 	pthread_mutex_unlock(&coder->left_dongle->mutex);
 	pthread_mutex_unlock(&coder->right_dongle->mutex);
 	coder->left_dongle->is_in_use = 0;
@@ -26,12 +22,21 @@ void	release_dongles(t_coder *coder, t_manager *mng)
 
 void	compile(t_coder *coder, t_manager *mng)
 {
+	coder->left_dongle->cooldown = get_rel_time(mng)
+		+ mng->args->dongle_cooldown;
+	coder->right_dongle->cooldown = get_rel_time(mng)
+		+ mng->args->dongle_cooldown;
 	print(coder, mng, 2);
-	// printf("%ld %d is compiling\n", get_rel_time(mng), coder->coder_id);
 	coder->time_to_burnout = get_rel_time(mng) + mng->args->burnout_time;
 	usleep(mng->args->compile_time * 1000);
 	coder->nb_compiles += 1;
-	release_dongles(coder, mng);
+	release_dongles(coder);
+}
+
+void	debug(t_coder *coder, t_manager *mng)
+{
+	print(coder, mng, 4);
+	usleep(mng->args->compile_time * 1000);
 }
 
 void	refactor(t_coder *coder, t_manager *mng)
@@ -55,8 +60,8 @@ void	wait_for_dongles(t_coder *coder, t_manager *mng)
 	{
 		if (coder->left_dongle->is_in_use == 0
 			&& coder->right_dongle->is_in_use == 0
-			&& (long)coder->left_dongle->cooldown >= get_rel_time(mng)
-			&& (long)coder->right_dongle->cooldown >= get_rel_time(mng))
+			&& (long)coder->left_dongle->cooldown <= get_rel_time(mng)
+			&& (long)coder->right_dongle->cooldown <= get_rel_time(mng))
 		{
 			take_dongles(coder, mng);
 			return ;
