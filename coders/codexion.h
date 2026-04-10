@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/10 08:50:26 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 09:09:33 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <time.h>
 # include <sys/time.h>
 
-typedef struct s_dongle	t_dongle; // Pre-declaration
-typedef struct s_coder	t_coder; // Pre-declaration
-typedef struct s_routine_arg t_routine_arg;
+typedef struct s_dongle			t_dongle; // Pre-declaration
+typedef struct s_coder			t_coder; // Pre-declaration
+typedef struct s_routine_arg	t_routine_arg; // Pre-declaration
 
 typedef struct s_args
 {
@@ -71,7 +71,6 @@ typedef struct s_routine_arg
 	t_coder		*coder;
 	t_manager	*manager;
 }	t_routine_arg;
-
 
 // Preparation
 t_args		*get_args(int argc, char **argv);

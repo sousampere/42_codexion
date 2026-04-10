@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 12:59:13 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/08 14:49:32 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/10 09:08:41 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 long	get_time_in_ms(void)
 {
-	// Return the current timestamp in ms
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);

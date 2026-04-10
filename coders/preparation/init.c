@@ -6,12 +6,11 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 08:55:36 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/10 09:08:18 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../codexion.h"
-
 
 t_coder	*create_coders(t_args *args)
 {
@@ -38,7 +37,6 @@ void	give_dongles(t_manager *mng)
 	long			current_time;
 
 	i = 0;
-	// Create n dongles memory place
 	mng->dongles = malloc(mng->args->nb_coders * sizeof(t_dongle));
 	if (!mng->dongles)
 		return ;
@@ -61,8 +59,8 @@ void	give_dongles(t_manager *mng)
 
 t_manager	*create_manager(int argc, char **argv)
 {
-	t_args 		*args;
-	t_coder 	*coders;
+	t_args		*args;
+	t_coder		*coders;
 	t_manager	*manager;
 
 	args = get_args(argc, argv);
