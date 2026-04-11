@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:47:38 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 18:34:30 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/11 14:41:03 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ void	*routine(void *args)
 	t_routine_arg	*arg;
 
 	arg = (t_routine_arg *)args;
+	if (arg->coder->time_to_burnout >= get_rel_time(arg->manager))
+		return (NULL);
+	pthread_mutex_lock(&arg->manager->start_mutex);
+	while (arg->manager->start == 0)
+		pthread_cond_wait(&arg->manager->start_cond, &arg->manager->start_mutex);
+	pthread_mutex_unlock(&arg->manager->start_mutex);
 	while (arg->coder->time_to_burnout > get_rel_time(arg->manager)
 		&& arg->coder->nb_compiles < arg->manager->args->nb_compiles)
 	{
@@ -46,9 +52,16 @@ int	start_simulation(t_manager *mng)
 		args[i].coder = &mng->coders[i];
 		args[i].manager = mng;
 		pthread_create(&threads[i], NULL, &routine, &args[i]);
+		printf("LAUNCHING THREAD %d\n", i);
 		i++;
 	}
 	i = -1;
+	// monitor_burnout(mng);
+	pthread_mutex_lock(&mng->start_mutex);
+	mng->start = 1;
+	printf("broadcasting\n");
+	pthread_cond_broadcast(&mng->start_cond);
+	pthread_mutex_unlock(&mng->start_mutex);
 	while (++i < mng->args->nb_coders)
 		pthread_join(threads[i], NULL);
 	free(threads);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:51:46 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 10:22:20 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/11 08:47:58 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ t_manager	*create_manager(int argc, char **argv)
 	manager->args = args;
 	manager->coders = coders;
 	manager->start_timestamp = get_time_in_ms();
+	manager->start = 0;
+	pthread_mutex_init(&manager->start_mutex, NULL);
+	pthread_cond_init(&manager->start_cond, NULL);
 	give_dongles(manager);
 	return (manager);
 }

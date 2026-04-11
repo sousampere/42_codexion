@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 12:54:51 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 18:35:40 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/11 14:40:22 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	wait_for_dongles(t_coder *coder, t_manager *mng)
 		// 	(long)coder->left_dongle->cooldown,
 		// 	(long)coder->right_dongle->cooldown,
 		// 	get_rel_time(mng));
-		
 		
 		if (coder->left_dongle->is_in_use == 0
 			&& coder->right_dongle->is_in_use == 0

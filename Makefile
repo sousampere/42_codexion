@@ -6,7 +6,7 @@
 #    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/10 17:03:37 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/11 14:32:01 by gaspard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,8 +71,9 @@ $(NAME):
 exe: $(NAME)
 	./a.out
 
-run: $(NAME)
-	./$(NAME) 200 500 10 10 10 1 10 edf
+run: re $(NAME)
+	clear && clear
+	./$(NAME) 10 1 10 10 10 1 10 edf
 
 krun: re
 	./$(NAME) 10 3000 200 100 200 10 400 fifo

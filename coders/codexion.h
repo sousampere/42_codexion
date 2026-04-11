@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/10 10:43:28 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/11 08:46:44 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ typedef struct s_manager
 	long			start_timestamp; // timestamp in us
 	int				is_burn_out; // 1 if the program exit with a burn-out
 	pthread_mutex_t	print_mutex;
+	int				start;
+	pthread_mutex_t	start_mutex;
+	pthread_cond_t	start_cond;
 }	t_manager;
 
 typedef struct s_routine_arg

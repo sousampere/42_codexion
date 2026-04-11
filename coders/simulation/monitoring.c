@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 15:03:54 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/10 17:00:12 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/11 14:38:56 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ void	*monitor_routine(void *manager)
 	i = -1;
 	mng = (t_manager *)manager;
 	is_every_coder_done = 1;
+	i = -1;
 	while (++i < mng->args->nb_coders)
 	{
+		// printf("checking coder %d\n", i);
 		if (mng->coders[i].time_to_burnout <= get_rel_time(mng))
 		{
 			printf("%ld %d burned out\n", get_rel_time(mng), mng->coders[i].coder_id);
+			printf("%ld %d burned out with date to %d\n", get_rel_time(mng), mng->coders[i].coder_id, mng->coders[i].time_to_burnout);
 			mng->is_burn_out = 1;
 			return (NULL);
 		}
@@ -40,7 +43,6 @@ void	*monitor_routine(void *manager)
 			}
 			i = -1;
 			is_every_coder_done = 1;
-			usleep(100); // 0.1ms sleep to not overload CPU
 		}
 	}
 	return (NULL);
