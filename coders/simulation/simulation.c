@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 19:47:38 by gaspard           #+#    #+#             */
-/*   Updated: 2026/04/11 14:41:03 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/11 14:42:49 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	*routine(void *args)
 	t_routine_arg	*arg;
 
 	arg = (t_routine_arg *)args;
-	if (arg->coder->time_to_burnout >= get_rel_time(arg->manager))
-		return (NULL);
 	pthread_mutex_lock(&arg->manager->start_mutex);
 	while (arg->manager->start == 0)
 		pthread_cond_wait(&arg->manager->start_cond, &arg->manager->start_mutex);
