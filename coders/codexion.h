@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/11 08:46:44 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/12 11:48:56 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_dongle
 	long			cooldown; // time in ms of last use
 	int				dongle_id; // id of the dongle
 	pthread_mutex_t	mutex; // lock/unlock the right to use it
-	pthread_cond_t	condition; // wait on that condition to broadcast
 	int				is_in_use; // 1 if a coder is using it
 	t_coder			*heap[2];
 }	t_dongle;
@@ -62,12 +61,7 @@ typedef struct s_manager
 	t_coder			*coders; // list of (nb_coders) coders
 	t_dongle		*dongles; // list of dongles
 	t_args			*args; // pointer to args struct
-	long			start_timestamp; // timestamp in us
-	int				is_burn_out; // 1 if the program exit with a burn-out
 	pthread_mutex_t	print_mutex;
-	int				start;
-	pthread_mutex_t	start_mutex;
-	pthread_cond_t	start_cond;
 }	t_manager;
 
 typedef struct s_routine_arg
@@ -76,28 +70,5 @@ typedef struct s_routine_arg
 	t_manager	*manager;
 }	t_routine_arg;
 
-// Preparation
-t_args		*get_args(int argc, char **argv);
-t_coder		*create_coders(t_args *args);
-void		give_dongles(t_manager *mng);
-void		free_all(t_manager *manager);
-t_manager	*create_manager(int argc, char **argv);
-
-// Misc
-long		get_time_in_ms(void);
-long		get_rel_time(t_manager *mng);
-void		print(t_coder *coder, t_manager *mng, int code);
-
-// Heap
-void		heap_rm(t_coder *coder);
-
-// Simulation
-int			monitor_burnout(t_manager *mng);
-void		refactor(t_coder *coder, t_manager *mng);
-void		compile(t_coder *coder, t_manager *mng);
-void		take_dongles(t_coder *coder, t_manager *mng);
-void		wait_for_dongles(t_coder *coder, t_manager *mng);
-int			start_simulation(t_manager *mng);
-void		debug(t_coder *coder, t_manager *mng);
 
 #endif // !CODEXION_H

@@ -6,7 +6,7 @@
 #    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/12 11:35:35 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/12 11:50:21 by gaspard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,19 +19,7 @@ GITHUB=https://github.com/sousampere/
 NAME=codexion
 COMPILER=cc
 FLAGS=-Wall -Wextra -Werror -pthread -g3
-C_FILES=coders/codexion.c\
-		coders/time.c\
-		coders/heap_moves.c\
-		\
-		coders/preparation/parsing.c\
-		coders/preparation/init.c\
-		\
-		coders/simulation/simulation.c\
-		coders/simulation/monitoring.c\
-		coders/simulation/coder_actions.c\
-		\
-		coders/misc/free.c\
-		coders/misc/print.c
+C_FILES=coders/codexion.c
 
 
 # COLORS
@@ -78,6 +66,7 @@ run: $(NAME)
 	clear && clear
 	@printf "$(CYAN)[Clean]$(RESET) ➡️  Running program...\n"
 	./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
+	$(MAKE) clean
 
 dbg: re run
 

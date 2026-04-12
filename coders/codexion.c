@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 05:42:19 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/11 14:32:12 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/12 11:48:44 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_manager	*manager;
-
-	manager = create_manager(argc, argv);
-	start_simulation(manager);
-	monitor_burnout(manager);
-	free_all(manager);
+	(void) argc;
+	(void) argv;
 	return (0);
 }
