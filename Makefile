@@ -6,7 +6,7 @@
 #    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/12 14:44:53 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/12 15:04:29 by gaspard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ C_FILES=coders/codexion.c\
 		coders/init/init_arguments.c\
 		coders/init/init_manager.c\
 		\
-		coders/time/time.c
+		coders/time/time.c\
+		\
+		coders/simulation/create_simulation.c
 
 
 # COLORS

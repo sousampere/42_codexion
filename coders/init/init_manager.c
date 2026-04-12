@@ -83,5 +83,6 @@ t_manager	*create_manager(int argc, char **argv)
 	manager->start_timestamp = get_time_in_ms();
 	give_dongles(manager);
 	pthread_mutex_init(&manager->print_mutex, NULL);
+	pthread_mutex_init(&manager->start_mutex, NULL);
 	return (manager);
 }

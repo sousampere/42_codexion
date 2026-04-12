@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/12 14:44:05 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/12 15:19:23 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <pthread.h>
 # include <time.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
 typedef struct s_dongle			t_dongle; // Pre-declaration
 typedef struct s_coder			t_coder; // Pre-declaration
@@ -63,12 +64,15 @@ typedef struct s_manager
 	t_args			*args; // pointer to args struct
 	pthread_mutex_t	print_mutex;
 	long			start_timestamp; // timestamp of simulation start
+	pthread_mutex_t	start_mutex;
+	bool			start_flag;
+	pthread_cond_t	wait_condition;
 }	t_manager;
 
 typedef struct s_routine_arg
 {
-	t_coder		*coder;
-	t_manager	*manager;
+	t_coder			*coder;
+	t_manager		*mng;
 }	t_routine_arg;
 
 // init
@@ -78,5 +82,8 @@ t_manager	*create_manager(int argc, char **argv);
 // time
 long		get_time_in_ms(void);
 long		get_rel_time(t_manager *mng);
+
+// simulation
+void		create_simulation(t_manager *mng);
 
 #endif // !CODEXION_H

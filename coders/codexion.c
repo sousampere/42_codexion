@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 05:42:19 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/12 14:49:59 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/12 15:04:48 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 	(void) argc;
 	(void) argv;
 	mng = create_manager(argc, argv);
+	create_simulation(mng);
 	// create simulation
 	// start simulation
 	// start monitoring
