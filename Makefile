@@ -6,7 +6,7 @@
 #    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/11 14:42:56 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/12 11:35:35 by gaspard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,6 @@ C_FILES=coders/codexion.c\
 		\
 		coders/misc/free.c\
 		coders/misc/print.c
-		
-
-# H_FILES=coders/codexion.h
 
 
 # COLORS
@@ -42,6 +39,16 @@ YELLOW=\033[0;33m
 CYAN=\033[0;36m
 GREEN=\033[0;32m
 RESET=\033[0m
+
+# Default args
+NB_CODERS=10
+BURNOUT=3000
+COMPILE=200
+DEBUG=100
+REFACTOR=200
+NB_COMPILES=10
+DONGLE_COOLDOWN=400
+SCHEDULER=fifo
 
 all: $(NAME)
 
@@ -65,28 +72,24 @@ $(NAME):
 	@printf "\033[9;80H\n"
 	@printf "$(CYAN)[Installation]$(RESET) ➡️  Compiling file...\n"
 	$(COMPILER) $(C_FILES) $(FLAGS) -o $(NAME)
-	@printf "$(CYAN)[Clean]$(RESET) ➡️  Cleaning useless folders...\n"
-# 	rm -rf a.out.dSYM/
 
-exe: $(NAME)
-	./a.out
-
-run: re $(NAME)
+# Run
+run: $(NAME)
 	clear && clear
-	./$(NAME) 10 1 10 10 10 10 10 edf
+	@printf "$(CYAN)[Clean]$(RESET) ➡️  Running program...\n"
+	./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
 
+dbg: re run
+
+# Run with kebertra prompt (credit: github/keroberos68)
 krun: re
-	./$(NAME) 10 3000 200 100 200 10 400 fifo
-# 	./$(NAME) 3				3000				69			100				200			20				400				fifo
-#             <nb_coders> <burnout-delay> <compile_time> <debug_time> <refactor_time> <nb_compiles> <dongle_cooldown> <scheduler>
+	./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
 
 clean:
+	@printf "$(CYAN)[Clean]$(RESET) ➡️  Cleaning useless folders...\n"
+	rm -rf $(NAME).dSYM/
 
 fclean: clean
 	rm -rf $(NAME)
 
 re: fclean $(NAME)
-
-# fclean: clean
-
-# re: fclean all
