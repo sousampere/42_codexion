@@ -6,7 +6,7 @@
 /*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/12 11:48:56 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/12 14:44:05 by gaspard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_manager
 	t_dongle		*dongles; // list of dongles
 	t_args			*args; // pointer to args struct
 	pthread_mutex_t	print_mutex;
+	long			start_timestamp; // timestamp of simulation start
 }	t_manager;
 
 typedef struct s_routine_arg
@@ -70,5 +71,12 @@ typedef struct s_routine_arg
 	t_manager	*manager;
 }	t_routine_arg;
 
+// init
+t_args		*get_args(int argc, char **argv);
+t_manager	*create_manager(int argc, char **argv);
+
+// time
+long		get_time_in_ms(void);
+long		get_rel_time(t_manager *mng);
 
 #endif // !CODEXION_H
