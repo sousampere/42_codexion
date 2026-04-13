@@ -18,7 +18,7 @@ PROJECT_START_DATE=2026-04-03
 GITHUB=https://github.com/sousampere/
 NAME=codexion
 COMPILER=cc
-FLAGS=-Wall -Wextra -Werror -pthread -g3
+FLAGS=-Wall -Wextra -Werror -pthread -g3 #-fsanitize=address
 C_FILES=coders/codexion.c\
 		\
 		coders/init/init_arguments.c\
@@ -26,7 +26,9 @@ C_FILES=coders/codexion.c\
 		\
 		coders/time/time.c\
 		\
-		coders/simulation/create_simulation.c
+		coders/simulation/create_simulation.c\
+		\
+		coders/heap/heap_moves.c
 
 
 # COLORS

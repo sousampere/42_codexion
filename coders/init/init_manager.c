@@ -32,28 +32,24 @@ t_coder	*create_coders(t_args *args)
 }
 void	give_dongles(t_manager *mng)
 {
-	int				i;
-	long			current_time;
+	int		i;
+	long	current_time;
 
-	i = 0;
 	mng->dongles = malloc(mng->args->nb_coders * sizeof(t_dongle));
 	if (!mng->dongles)
 		return ;
 	current_time = get_rel_time(mng);
-	while (i < mng->args->nb_coders - 1)
+	i = -1;
+	while (++i < mng->args->nb_coders)
 	{
+		printf("aaaaaa");
 		mng->dongles[i].cooldown = current_time;
 		mng->dongles[i].dongle_id = i + 1;
 		mng->coders[i].left_dongle = &mng->dongles[i];
-		mng->coders[i].right_dongle = &mng->dongles[i + 1];
+		mng->coders[i].right_dongle = &mng->dongles[(i + 1) % mng->args->nb_coders];
 		pthread_mutex_init(&mng->dongles[i].mutex, NULL);
-		i++;
+		heap_init(mng->coders[i].left_dongle);
 	}
-	// mng->dongles[i].cooldown = current_time;
-	mng->dongles[i].dongle_id = i + 1;
-	mng->coders[i].left_dongle = &mng->dongles[i];
-	mng->coders[i].right_dongle = &mng->dongles[0];
-	pthread_mutex_init(&mng->dongles[i].mutex, NULL);
 }
 
 t_manager	*create_manager(int argc, char **argv)

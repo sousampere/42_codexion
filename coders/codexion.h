@@ -86,4 +86,11 @@ long		get_rel_time(t_manager *mng);
 // simulation
 void		create_simulation(t_manager *mng);
 
+// heap
+bool		is_first_in_queue(t_dongle *dongle, t_coder *coder);
+void		heap_rm(t_coder *coder);
+void		heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng);
+void		heap_pop(t_dongle	*dongle);
+void		heap_init(t_dongle	*dongle);
+
 #endif // !CODEXION_H
