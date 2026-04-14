@@ -20,19 +20,10 @@ NAME=codexion
 COMPILER=cc
 FLAGS=-Wall -Wextra -Werror -pthread -g3
 C_FILES=coders/codexion.c\
-		coders/time.c\
-		coders/heap_moves.c\
 		\
-		coders/preparation/parsing.c\
-		coders/preparation/init.c\
+		coders/manager/create_manager.c\
 		\
-		coders/simulation/simulation.c\
-		coders/simulation/monitoring.c\
-		coders/simulation/coder_actions.c\
-		\
-		coders/misc/free.c\
-		coders/misc/print.c
-
+		coders/free/free.c
 
 # COLORS
 YELLOW=\033[0;33m
