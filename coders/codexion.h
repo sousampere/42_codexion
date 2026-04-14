@@ -50,7 +50,10 @@ typedef struct s_coder
 
 typedef struct s_dongle
 {
-	int	id;
+	int				id;
+	int				cooldown_end;
+	t_coder			*heap;
+	pthread_mutex_t	mutex;
 }	t_dongle;
 
 typedef struct s_manager
