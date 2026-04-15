@@ -18,4 +18,5 @@ int main(int argc, char **argv)
 		printf("coder %d\n", mng->coders[i].left_dongle->id);
 		printf("left %d\n", mng->coders[i].right_dongle->id);
 	}
+	printf("%p\n", mng->coders[0].right_dongle->heap[0]);
 }

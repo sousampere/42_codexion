@@ -52,7 +52,7 @@ typedef struct s_dongle
 {
 	int				id;
 	int				cooldown_end;
-	t_coder			*heap;
+	t_coder			*heap[2];
 	pthread_mutex_t	mutex;
 }	t_dongle;
 
@@ -73,6 +73,10 @@ void		*free_mng_and_args(t_manager *mng);
 
 // manager
 t_manager	*init_manager(int argc, char **argv);
+
+// heap
+void		init_heap(t_dongle *dongle);
+void		heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng);
 
 
 #endif // !CODEXION_H
