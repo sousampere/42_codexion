@@ -17,6 +17,6 @@ int main(int argc, char **argv)
 		printf("left priority -> %d, %d\n", mng->coders[i].left_dongle->heap[0]->id, mng->coders[i].left_dongle->heap[1]->id);
 		printf("right priority -> %d, %d\n", mng->coders[i].right_dongle->heap[0]->id, mng->coders[i].right_dongle->heap[1]->id);
 	}
-	// heap_push(mng->coders->left_dongle, mng->coders, mng);
-	// printf("%d\n", mng->coders[0].left_dongle->heap[0]->id);
+	start_monitor(mng);
+	// printf("%d\n", mng->coders[0].left_dongle->heap[1]->id);
 }

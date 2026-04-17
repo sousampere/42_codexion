@@ -44,6 +44,7 @@ typedef struct s_coder
 {
 	int			id;
 	int			burnout_delay;
+	int			nb_compiles;
 	t_dongle	*left_dongle;
 	t_dongle	*right_dongle;
 }	t_coder;
@@ -60,6 +61,7 @@ typedef struct s_manager
 {
 	t_args	*arg;
 	t_coder	*coders;
+	bool	is_ended;
 }	t_manager;
 
 // typedef struct s_routine_arg
@@ -78,5 +80,7 @@ t_manager	*init_manager(int argc, char **argv);
 void		init_heap(t_dongle *dongle);
 void		heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng);
 
+// monitor
+void		start_monitor(t_manager *mng);
 
 #endif // !CODEXION_H

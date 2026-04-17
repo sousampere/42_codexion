@@ -25,7 +25,9 @@ C_FILES=coders/codexion.c\
 		\
 		coders/free/free.c\
 		\
-		coders/heap/heap.c
+		coders/heap/heap.c\
+		\
+		coders/monitor/monitor.c
 
 # COLORS
 YELLOW=\033[0;33m

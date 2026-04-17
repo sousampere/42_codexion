@@ -78,6 +78,7 @@ t_coder	*init_coders(t_manager *mng)
 	{
 		coders[i].id = i + 1;
 		coders[i].burnout_delay = mng->arg->burnout_time;
+		coders[i].nb_compiles = 0;
 	}
 	return (coders);
 }
