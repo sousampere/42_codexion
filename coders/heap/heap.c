@@ -9,9 +9,11 @@ void	init_heap(t_dongle *dongle)
 
 void	heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng)
 {
+	printf("[DBG] pushed coder_%d to dongle_%d\n", coder->id, dongle->id);
 	if (dongle->heap[0] == NULL)
 	{
 		dongle->heap[0] = coder;
+		printf("OH");
 		return ;
 	}
 	if (mng->arg->scheduler == 1) // fifo

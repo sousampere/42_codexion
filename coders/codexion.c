@@ -4,8 +4,6 @@
 int main(int argc, char **argv)
 {
 	t_manager	*mng;
-	(void) argc;
-	(void) argv;
 
 	mng = init_manager(argc, argv);
 	if (!mng)
@@ -13,10 +11,12 @@ int main(int argc, char **argv)
 	int i = -1;
 	while (++i < mng->arg->nb_coders)
 	{
-		
 		printf("-----\nright %d\n", mng->coders[i].left_dongle->id);
 		printf("coder %d\n", mng->coders[i].left_dongle->id);
 		printf("left %d\n", mng->coders[i].right_dongle->id);
+		printf("left priority -> %d, %d\n", mng->coders[i].left_dongle->heap[0]->id, mng->coders[i].left_dongle->heap[1]->id);
+		printf("right priority -> %d, %d\n", mng->coders[i].right_dongle->heap[0]->id, mng->coders[i].right_dongle->heap[1]->id);
 	}
-	printf("%p\n", mng->coders[0].right_dongle->heap[0]);
+	// heap_push(mng->coders->left_dongle, mng->coders, mng);
+	// printf("%d\n", mng->coders[0].left_dongle->heap[0]->id);
 }

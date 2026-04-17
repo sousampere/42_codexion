@@ -100,8 +100,13 @@ void	init_dongles(t_manager *mng)
 		mng->coders->left_dongle->heap[0] = malloc(sizeof(t_coder));
 		mng->coders->left_dongle->heap[1] = malloc(sizeof(t_coder));
 		pthread_mutex_init(&mng->coders[i].left_dongle->mutex, NULL);
+	}
+	i = -1;
+	while (++i < mng->arg->nb_coders)
+	{
 		init_heap(mng->coders[i].left_dongle);
-		init_heap(mng->coders[i].right_dongle);
+		heap_push(mng->coders[i % mng->arg->nb_coders].left_dongle, &mng->coders[i % mng->arg->nb_coders], mng);
+		heap_push(mng->coders[i % mng->arg->nb_coders].left_dongle, &mng->coders[(i + 1) % mng->arg->nb_coders], mng);
 	}
 }
 
@@ -119,5 +124,6 @@ t_manager	*init_manager(int argc, char **argv)
 	if (!mng->coders)
 		return (free_mng_and_args(mng));
 	init_dongles(mng);
+	printf("okkkkkk");
 	return (mng);
 }
