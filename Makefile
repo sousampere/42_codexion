@@ -29,7 +29,9 @@ C_FILES=coders/codexion.c\
 		\
 		coders/monitor/monitor.c\
 		\
-		coders/time/time.c
+		coders/time/time.c\
+		\
+		coders/printf_secure/sprint.c
 
 # COLORS
 YELLOW=\033[0;33m

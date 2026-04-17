@@ -27,7 +27,7 @@ bool	check_burnout(t_manager *mng)
 		else
 			break;
 	}
-	printf("%d %d burned out\n", get_rel_time(mng), mng->coders[i].id);
+	sprint(&mng->coders[i], mng, 5);
 	return (true);
 }
 

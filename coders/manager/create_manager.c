@@ -126,5 +126,6 @@ t_manager	*init_manager(int argc, char **argv)
 		return (free_mng_and_args(mng));
 	init_dongles(mng);
 	mng->start_timestamp = get_time_in_ms();
+	pthread_mutex_init(&mng->printf_mtx, NULL);
 	return (mng);
 }

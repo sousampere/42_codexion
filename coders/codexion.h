@@ -59,10 +59,11 @@ typedef struct s_dongle
 
 typedef struct s_manager
 {
-	t_args	*arg;
-	t_coder	*coders;
-	bool	is_ended;
-	long	start_timestamp;
+	t_args			*arg;
+	t_coder			*coders;
+	bool			is_ended;
+	long			start_timestamp;
+	pthread_mutex_t	printf_mtx;
 }	t_manager;
 
 // typedef struct s_routine_arg
@@ -89,6 +90,9 @@ bool		check_end(t_manager *mng);
 // time
 long		get_time_in_ms(void);
 int			get_rel_time(t_manager *mng);
+
+// printf_secure
+void		sprint(t_coder *coder, t_manager *mng, int code);
 
 
 #endif // !CODEXION_H
