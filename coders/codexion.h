@@ -66,11 +66,11 @@ typedef struct s_manager
 	pthread_mutex_t	printf_mtx;
 }	t_manager;
 
-// typedef struct s_routine_arg
-// {
-// 	t_coder		*coder;
-// 	t_manager	*manager;
-// }	t_routine_arg;
+typedef struct s_routine_arg
+{
+	t_coder		*coder;
+	t_manager	*manager;
+}	t_routine_arg;
 
 // free
 void		*free_mng_and_args(t_manager *mng);
@@ -94,5 +94,7 @@ int			get_rel_time(t_manager *mng);
 // printf_secure
 void		sprint(t_coder *coder, t_manager *mng, int code);
 
+// simulation
+void		start_simulation(t_manager *mng);
 
 #endif // !CODEXION_H
