@@ -11,28 +11,32 @@ bool	check_end(t_manager *mng)
 		if (mng->coders[i].nb_compiles != mng->arg->nb_compiles)
 			return (false);
 	}
+	printf("🏁 === Simulation ended. Exiting the matrix ===\n");
 	return (true);
 }
 
-// bool	check_burnout(t_manager *mng)
-// {
-// 	int	i;
+bool	check_burnout(t_manager *mng)
+{
+	int	i;
 
-// 	i = -1;
-// 	while (++i < mng->arg->nb_coders)
-// 	{
-// 		if (mng->coders[i].burnout_delay != mng->arg->nb_compiles)
-// 			return (false);
-// 	}
-// 	return (true);
-// }
+	i = -1;
+	while (++i < mng->arg->nb_coders)
+	{
+		if (mng->coders[i].burnout_delay > get_rel_time(mng))
+			return (false);
+		else
+			break;
+	}
+	printf("%d %d burned out\n", get_rel_time(mng), mng->coders[i].id);
+	return (true);
+}
 
 void	*monitor_routine(void *arg)
 {
 	t_manager	*mng;
 
 	mng = (t_manager *) arg;
-	while (!check_end(mng))
+	while (!check_end(mng) && !check_burnout(mng))
 		continue;
 	return (NULL);
 }

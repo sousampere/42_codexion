@@ -125,6 +125,6 @@ t_manager	*init_manager(int argc, char **argv)
 	if (!mng->coders)
 		return (free_mng_and_args(mng));
 	init_dongles(mng);
-	printf("okkkkkk");
+	mng->start_timestamp = get_time_in_ms();
 	return (mng);
 }

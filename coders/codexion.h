@@ -62,6 +62,7 @@ typedef struct s_manager
 	t_args	*arg;
 	t_coder	*coders;
 	bool	is_ended;
+	long	start_timestamp;
 }	t_manager;
 
 // typedef struct s_routine_arg
@@ -82,5 +83,12 @@ void		heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng);
 
 // monitor
 void		start_monitor(t_manager *mng);
+bool		check_burnout(t_manager *mng);
+bool		check_end(t_manager *mng);
+
+// time
+long		get_time_in_ms(void);
+int			get_rel_time(t_manager *mng);
+
 
 #endif // !CODEXION_H
