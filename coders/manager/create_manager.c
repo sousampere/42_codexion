@@ -123,8 +123,8 @@ t_manager	*init_manager(int argc, char **argv)
 	if (!mng->arg)
 		return (NULL);
 	mng->coders = init_coders(mng);
-	if (!mng->coders)
-		return (free_mng_and_args(mng));
+	// if (!mng->coders)
+	// 	return (free_mng_and_args(mng));
 	init_dongles(mng);
 	mng->start_timestamp = get_time_in_ms();
 	pthread_mutex_init(&mng->printf_mtx, NULL);

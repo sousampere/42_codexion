@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/11 08:46:44 by gaspard          ###   ########.fr       */
+/*   Updated: 2026/04/18 15:28:23 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_manager
 	bool			is_ended;
 	long			start_timestamp;
 	pthread_mutex_t	printf_mtx;
+	pthread_t		*coders_threads;
 }	t_manager;
 
 typedef struct s_routine_arg
@@ -83,7 +84,8 @@ t_manager	*init_manager(int argc, char **argv);
 void		init_heap(t_dongle *dongle);
 void		heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng);
 void		heap_pop(t_dongle *dongle);
-bool		has_heap_priority(t_dongle *dongle, t_coder *coder);
+bool		has_heap_priority(t_dongle *dongle, t_coder *coder, t_manager *mng);
+void		heap_rm(t_dongle *dongle, t_coder *coder);
 
 // monitor
 void		start_monitor(t_manager *mng);

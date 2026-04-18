@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gaspard <gaspard@student.42.fr>            +#+  +:+       +#+         #
+#    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/12 11:35:35 by gaspard          ###   ########.fr        #
+#    Updated: 2026/04/18 14:49:45 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,9 @@ run: $(NAME)
 	clear && clear
 	@printf "$(CYAN)[Clean]$(RESET) ➡️  Running program...\n"
 	./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
+
+valgrind: re
+	valgrind ./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
 
 dbg: re run
 
