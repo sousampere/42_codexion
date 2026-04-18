@@ -25,5 +25,7 @@ void	sprint(t_coder *coder, t_manager *mng, int code)
 	if (code == 5)
 		printf("\033[0;31m%d %d burned out.\033[0m\n",
 			get_rel_time(mng), coder->id);
+	if (code == 6)
+		printf("🏁 === Simulation ended. Exiting the matrix ===\n");
 	pthread_mutex_unlock(&mng->printf_mtx);
 }

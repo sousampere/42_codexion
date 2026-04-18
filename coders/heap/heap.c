@@ -31,7 +31,7 @@ void	heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng)
 		dongle->heap[1] = coder;
 	else // edf
 	{
-		if (dongle->heap[0]->burnout_delay < coder->burnout_delay)
+		if (dongle->heap[0]->burnout_delay <= coder->burnout_delay)
 			dongle->heap[1] = coder;
 		else
 		{

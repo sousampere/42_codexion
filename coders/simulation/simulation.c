@@ -8,11 +8,21 @@ void	compile(t_coder *coder, t_manager *mng)
 	coder->right_dongle->cooldown_end = get_rel_time(mng)
 		+ mng->arg->dongle_cooldown;
 	sprint(coder, mng, 2);
-	sleep(2);
 	coder->burnout_delay = get_rel_time(mng) + mng->arg->burnout_time;
 	usleep(mng->arg->compile_time * 1000);
 	coder->nb_compiles += 1;
-	printf("coder %d has now a burnout of %d\n", coder->id, coder->burnout_delay);
+}
+
+void	debug(t_coder *coder, t_manager *mng)
+{
+	sprint(coder, mng, 4);
+	usleep(mng->arg->compile_time * 1000);
+}
+
+void	refactor(t_coder *coder, t_manager *mng)
+{
+	sprint(coder, mng, 3);
+	usleep(mng->arg->refactor_time * 1000);
 }
 
 bool	can_pick_dongles(t_coder *coder, t_manager *mng)
@@ -38,16 +48,32 @@ bool	can_pick_dongles(t_coder *coder, t_manager *mng)
 	return (status);
 }
 
+void	release_dongles(t_coder *coder)
+{
+	pthread_mutex_lock(&coder->left_dongle->mutex);
+	coder->left_dongle->is_used = false;
+	pthread_mutex_unlock(&coder->left_dongle->mutex);
+	pthread_mutex_lock(&coder->right_dongle->mutex);
+	coder->right_dongle->is_used = false;
+	pthread_mutex_unlock(&coder->right_dongle->mutex);
+}
+
 void	*routine(void *arg)
 {
 	t_routine_arg	*args;
 
 	args = (t_routine_arg *) arg;
 	printf("%d woke up 😈.\n", args->coder->id);
-	if (can_pick_dongles(args->coder, args->manager))
+	while (args->coder->nb_compiles < args->manager->arg->nb_compiles)
 	{
-		sprint(args->coder, args->manager, 1);
-		compile(args->coder, args->manager);
+		if (can_pick_dongles(args->coder, args->manager))
+		{
+			sprint(args->coder, args->manager, 1);
+			compile(args->coder, args->manager);
+			release_dongles(args->coder);
+			debug(args->coder, args->manager);
+			refactor(args->coder, args->manager);
+		}
 	}
 	return (NULL);
 }

@@ -11,7 +11,7 @@ bool	check_end(t_manager *mng)
 		if (mng->coders[i].nb_compiles != mng->arg->nb_compiles)
 			return (false);
 	}
-	printf("🏁 === Simulation ended. Exiting the matrix ===\n");
+	sprint(&mng->coders[0], mng, 6);
 	return (true);
 }
 
