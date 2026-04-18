@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:30:23 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:30:43 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/18 18:37:14 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ bool	check_burnout(t_manager *mng)
 	{
 		if (get_rel_time(mng) >= mng->coders[i].burnout_delay)
 		{
+			mng->is_ended = true;
 			sprint(&mng->coders[i], mng, 5);
 			return (true);
 		}

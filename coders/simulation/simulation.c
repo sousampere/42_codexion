@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:27:29 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:51:09 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/18 18:50:32 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ bool	can_pick_dongles(t_coder *coder, t_manager *mng)
 {
 	bool	status;
 
-	pthread_mutex_lock(&coder->left_dongle->mutex);
-	pthread_mutex_lock(&coder->right_dongle->mutex);
+	printf("%d %d %d %d %d\n",
+	coder->left_dongle->is_used == 0,
+	coder->right_dongle->is_used == 0,
+	has_heap_priority(coder->left_dongle, coder, mng),
+	coder->left_dongle->cooldown_end <= get_rel_time(mng),
+	coder->right_dongle->cooldown_end <= get_rel_time(mng));
 	if (coder->left_dongle->is_used == 0
 		&& coder->right_dongle->is_used == 0
 		&& has_heap_priority(coder->left_dongle, coder, mng)
@@ -59,7 +63,8 @@ void	*routine(void *arg)
 	{
 		if (args->manager->arg->nb_coders == 1)
 			return (NULL);
-		if (can_pick_dongles(args->coder, args->manager))
+		if (can_pick_dongles(args->coder, args->manager)
+		&& !args->manager->is_ended)
 		{
 			heap_rm(args->coder->left_dongle, args->coder);
 			heap_rm(args->coder->right_dongle, args->coder);

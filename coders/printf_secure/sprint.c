@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:26:44 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:54:10 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/18 18:39:21 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	sprint(t_coder *coder, t_manager *mng, int code)
 	if (code == 4 && !mng->is_ended)
 		printf("\033[0;35m%d %d is debugging\033[0m\n",
 			get_rel_time(mng), coder->id);
-	if (code == 5 && !mng->is_ended)
+	if (code == 5)
 		printf("\033[0;31m%d %d burned out\033[0m\n",
 			get_rel_time(mng), coder->id);
 	if (code == 6)
