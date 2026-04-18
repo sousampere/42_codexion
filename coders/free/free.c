@@ -26,10 +26,13 @@ void	free_all(t_manager *mng)
 
 	i = -1;
 	while (++i < mng->arg->nb_coders)
+		pthread_join(mng->coders_threads[i], NULL);
+	i = -1;
+	while (++i < mng->arg->nb_coders)
 	{
 		pthread_mutex_destroy(&mng->coders[i].left_dongle->mutex);
-		// free(mng->coders[i].left_dongle->heap[0]);
-		// free(mng->coders[i].left_dongle->heap[1]);
+		// free(mng->dongles[i].heap[0]);
+		// free(mng->dongles[i].heap[1]);
 	}
 	free(mng->coders);
 	free(mng->dongles);

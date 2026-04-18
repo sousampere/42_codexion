@@ -72,7 +72,7 @@ void	*routine(void *arg)
 
 	args = (t_routine_arg *) arg;
 	// printf("%d woke up 😈.\n", args->coder->id);
-	while (args->coder->nb_compiles < args->manager->arg->nb_compiles)
+	while (args->coder->nb_compiles < args->manager->arg->nb_compiles && !args->manager->is_ended)
 	{
 		// printf("coder %d has priority of %d\n", args->coder->id, can_pick_dongles(args->coder, args->manager));
 		if (can_pick_dongles(args->coder, args->manager))

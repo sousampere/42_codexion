@@ -11,6 +11,7 @@ bool	check_end(t_manager *mng)
 		if (mng->coders[i].nb_compiles != mng->arg->nb_compiles)
 			return (false);
 	}
+	mng->is_ended = true;
 	sprint(&mng->coders[0], mng, 6);
 	return (true);
 }

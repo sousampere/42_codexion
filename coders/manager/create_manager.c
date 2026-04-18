@@ -97,10 +97,8 @@ void	init_dongles(t_manager *mng)
 		mng->coders[i % mng->arg->nb_coders].right_dongle = &mng->dongles[(i + 1) % mng->arg->nb_coders];
 		mng->coders[i % mng->arg->nb_coders].left_dongle->id = i + 1;
 		mng->coders[i % mng->arg->nb_coders].left_dongle->is_used = false;
-		mng->coders[i].left_dongle->cooldown_end = 0;
-		mng->coders->left_dongle->heap[0] = malloc(sizeof(t_coder));
-		mng->coders->left_dongle->heap[1] = malloc(sizeof(t_coder));
-		pthread_mutex_init(&mng->coders[i].left_dongle->mutex, NULL);
+		mng->coders[i % mng->arg->nb_coders].left_dongle->cooldown_end = 0;
+		pthread_mutex_init(&mng->coders[i % mng->arg->nb_coders].left_dongle->mutex, NULL);
 	}
 	i = -1;
 	while (++i < mng->arg->nb_coders)
@@ -126,6 +124,7 @@ t_manager	*init_manager(int argc, char **argv)
 	// 	return (free_mng_and_args(mng));
 	init_dongles(mng);
 	mng->start_timestamp = get_time_in_ms();
+	mng->is_ended = false;
 	pthread_mutex_init(&mng->printf_mtx, NULL);
 	return (mng);
 }
