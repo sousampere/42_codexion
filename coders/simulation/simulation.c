@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:27:29 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:48:18 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/18 17:51:09 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,17 @@ bool	can_pick_dongles(t_coder *coder, t_manager *mng)
 	return (status);
 }
 
-void	release_dongles(t_coder *coder)
+void	release_dongles(t_coder *coder, t_manager *mng)
 {
 	pthread_mutex_lock(&coder->left_dongle->mutex);
 	coder->left_dongle->is_used = false;
+	coder->left_dongle->cooldown_end = get_rel_time(mng)
+		+ mng->arg->dongle_cooldown;
 	pthread_mutex_unlock(&coder->left_dongle->mutex);
 	pthread_mutex_lock(&coder->right_dongle->mutex);
 	coder->right_dongle->is_used = false;
+	coder->right_dongle->cooldown_end = get_rel_time(mng)
+		+ mng->arg->dongle_cooldown;
 	pthread_mutex_unlock(&coder->right_dongle->mutex);
 }
 
@@ -61,7 +65,7 @@ void	*routine(void *arg)
 			heap_rm(args->coder->right_dongle, args->coder);
 			sprint(args->coder, args->manager, 1);
 			compile(args->coder, args->manager);
-			release_dongles(args->coder);
+			release_dongles(args->coder, args->manager);
 			debug(args->coder, args->manager);
 			refactor(args->coder, args->manager);
 			heap_push(args->coder->left_dongle, args->coder, args->manager);
