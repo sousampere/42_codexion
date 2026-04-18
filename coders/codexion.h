@@ -55,6 +55,7 @@ typedef struct s_dongle
 	int				cooldown_end;
 	t_coder			*heap[2];
 	pthread_mutex_t	mutex;
+	bool			is_used;
 }	t_dongle;
 
 typedef struct s_manager
@@ -81,6 +82,8 @@ t_manager	*init_manager(int argc, char **argv);
 // heap
 void		init_heap(t_dongle *dongle);
 void		heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng);
+void		heap_pop(t_dongle *dongle);
+bool		has_heap_priority(t_dongle *dongle, t_coder *coder);
 
 // monitor
 void		start_monitor(t_manager *mng);

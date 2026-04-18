@@ -22,13 +22,13 @@ bool	check_burnout(t_manager *mng)
 	i = -1;
 	while (++i < mng->arg->nb_coders)
 	{
-		if (mng->coders[i].burnout_delay > get_rel_time(mng))
-			return (false);
-		else
-			break;
+		if (get_rel_time(mng) >= mng->coders[i].burnout_delay)
+		{
+			sprint(&mng->coders[i], mng, 5);
+			return (true);
+		}
 	}
-	sprint(&mng->coders[i], mng, 5);
-	return (true);
+	return (false);
 }
 
 void	*monitor_routine(void *arg)

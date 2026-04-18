@@ -97,6 +97,7 @@ void	init_dongles(t_manager *mng)
 		mng->coders[i % mng->arg->nb_coders].left_dongle = &dongles[i % mng->arg->nb_coders];
 		mng->coders[i % mng->arg->nb_coders].right_dongle = &dongles[(i + 1) % mng->arg->nb_coders];
 		mng->coders[i % mng->arg->nb_coders].left_dongle->id = i + 1;
+		mng->coders[i % mng->arg->nb_coders].left_dongle->is_used = false;
 		mng->coders[i].left_dongle->cooldown_end = 0;
 		mng->coders->left_dongle->heap[0] = malloc(sizeof(t_coder));
 		mng->coders->left_dongle->heap[1] = malloc(sizeof(t_coder));
