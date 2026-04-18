@@ -48,7 +48,7 @@ t_args	*get_args(int argc, char **argv)
 		return (NULL);
 	if (argc != 9)
 		return (NULL);
-	args_ptr = malloc(sizeof(t_args));
+	args_ptr = malloc(sizeof(t_args)); // Done
 	if (!args_ptr)
 		return (NULL);
 	args_ptr->nb_coders = atoi(argv[1]);
@@ -70,7 +70,7 @@ t_coder	*init_coders(t_manager *mng)
 	t_coder	*coders;
 	int		i;
 
-	coders = malloc(sizeof(t_coder) * mng->arg->nb_coders);
+	coders = malloc(sizeof(t_coder) * mng->arg->nb_coders); // Done
 	if (!coders)
 		return (NULL);
 	i = -1;
@@ -85,17 +85,16 @@ t_coder	*init_coders(t_manager *mng)
 
 void	init_dongles(t_manager *mng)
 {
-	t_dongle	*dongles;
 	int			i;
 
-	dongles = malloc(sizeof(t_dongle) * mng->arg->nb_coders);
-	if (!dongles)
+	mng->dongles = malloc(sizeof(t_dongle) * mng->arg->nb_coders);
+	if (!mng->dongles)
 		return ;
 	i = -1;
 	while (++i < mng->arg->nb_coders)
 	{
-		mng->coders[i % mng->arg->nb_coders].left_dongle = &dongles[i % mng->arg->nb_coders];
-		mng->coders[i % mng->arg->nb_coders].right_dongle = &dongles[(i + 1) % mng->arg->nb_coders];
+		mng->coders[i % mng->arg->nb_coders].left_dongle = &mng->dongles[i % mng->arg->nb_coders];
+		mng->coders[i % mng->arg->nb_coders].right_dongle = &mng->dongles[(i + 1) % mng->arg->nb_coders];
 		mng->coders[i % mng->arg->nb_coders].left_dongle->id = i + 1;
 		mng->coders[i % mng->arg->nb_coders].left_dongle->is_used = false;
 		mng->coders[i].left_dongle->cooldown_end = 0;

@@ -94,15 +94,15 @@ void	*routine(void *arg)
 void	start_simulation(t_manager *mng)
 {
 	int				i;
-	t_routine_arg	*args;
 
 	i = -1;
 	mng->coders_threads = malloc(sizeof(pthread_t) * mng->arg->nb_coders);
-	args = malloc(sizeof(t_routine_arg) * mng->arg->nb_coders);
+	mng->routine_args = malloc(sizeof(t_routine_arg) * mng->arg->nb_coders);
 	while (++i < mng->arg->nb_coders)
 	{
-		args[i].manager = mng;
-		args[i].coder = &mng->coders[i];
-		pthread_create(&mng->coders_threads[i], NULL, &routine, &args[i]);
+		mng->routine_args[i].manager = mng;
+		mng->routine_args[i].coder = &mng->coders[i];
+		pthread_create(&mng->coders_threads[i],
+			NULL, &routine, &mng->routine_args[i]);
 	}
 }

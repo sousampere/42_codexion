@@ -6,7 +6,7 @@
 #    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/18 14:49:45 by gtourdia         ###   ########.fr        #
+#    Updated: 2026/04/18 16:53:57 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,13 +81,9 @@ run: $(NAME)
 	./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
 
 valgrind: re
-	valgrind ./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
+	valgrind --leak-check=full ./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
 
 dbg: re run
-
-# Run with kebertra prompt (credit: github/keroberos68)
-krun: re
-	./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
 
 clean:
 	@printf "$(CYAN)[Clean]$(RESET) ➡️  Cleaning useless folders...\n"

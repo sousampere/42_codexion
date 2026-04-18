@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 15:28:23 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/18 16:23:10 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_manager
 	long			start_timestamp;
 	pthread_mutex_t	printf_mtx;
 	pthread_t		*coders_threads;
+	t_dongle		*dongles;
+	t_routine_arg	*routine_args;
 }	t_manager;
 
 typedef struct s_routine_arg
@@ -76,6 +78,7 @@ typedef struct s_routine_arg
 
 // free
 void		*free_mng_and_args(t_manager *mng);
+void		free_all(t_manager *mng);
 
 // manager
 t_manager	*init_manager(int argc, char **argv);

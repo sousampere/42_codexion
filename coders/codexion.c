@@ -19,4 +19,5 @@ int main(int argc, char **argv)
 	// }
 	start_simulation(mng);
 	start_monitor(mng);
+	free_all(mng);
 }
