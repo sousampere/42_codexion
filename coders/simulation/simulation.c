@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:27:29 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:28:15 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/18 17:48:18 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	*routine(void *arg)
 	while (args->coder->nb_compiles < args->manager->arg->nb_compiles
 		&& !args->manager->is_ended)
 	{
+		if (args->manager->arg->nb_coders == 1)
+			return (NULL);
 		if (can_pick_dongles(args->coder, args->manager))
 		{
 			heap_rm(args->coder->left_dongle, args->coder);
