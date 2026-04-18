@@ -1,68 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_manager.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/18 17:31:18 by gtourdia          #+#    #+#             */
+/*   Updated: 2026/04/18 17:38:44 by gtourdia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../codexion.h"
 
-// Overflow, negative, non-integer and non-digit protection
-int	is_invalid_value(char *string)
+void	push_coders(t_manager *mng)
 {
 	int	i;
 
 	i = -1;
-	while (string[++i])
+	while (++i < mng->arg->nb_coders)
 	{
-		if (string[i] < '0' || string[i] > '9')
-			return (1);
+		init_heap(mng->coders[i].left_dongle);
+		heap_push(mng->coders[i % mng->arg->nb_coders].left_dongle,
+			&mng->coders[i % mng->arg->nb_coders], mng);
+		heap_push(mng->coders[i % mng->arg->nb_coders].left_dongle,
+			&mng->coders[(i + 1) % mng->arg->nb_coders], mng);
 	}
-	if (strlen(string) > 10)
-		return (1);
-	if (strlen(string) >= 9 && string[9] >= '8')
-	{
-		string[9] = '\0';
-		if (atoi(string) >= 214748364)
-			return (1);
-	}
-	return (0);
-}
-
-int	validate_args(char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (++i)
-	{
-		if (i == 8)
-			break ;
-		if (is_invalid_value(argv[i]))
-			return (0);
-	}
-	return (1);
-}
-
-t_args	*get_args(int argc, char **argv)
-{
-	t_args	*args_ptr;
-
-	if (!validate_args(argv))
-		return (NULL);
-	if (strcmp(argv[8], "fifo") != 0 && strcmp(argv[8], "edf") != 0)
-		return (NULL);
-	if (argc != 9)
-		return (NULL);
-	args_ptr = malloc(sizeof(t_args)); // Done
-	if (!args_ptr)
-		return (NULL);
-	args_ptr->nb_coders = atoi(argv[1]);
-	args_ptr->burnout_time = atoi(argv[2]);
-	args_ptr->compile_time = atoi(argv[3]);
-	args_ptr->debug_time = atoi(argv[4]);
-	args_ptr->refactor_time = atoi(argv[5]);
-	args_ptr->nb_compiles = atoi(argv[6]);
-	args_ptr->dongle_cooldown = atoi(argv[7]);
-	if (strcmp(argv[8], "fifo") == 0)
-		args_ptr->scheduler = 1;
-	if (strcmp(argv[8], "edf") == 0)
-		args_ptr->scheduler = 0;
-	return (args_ptr);
 }
 
 t_coder	*init_coders(t_manager *mng)
@@ -70,7 +32,7 @@ t_coder	*init_coders(t_manager *mng)
 	t_coder	*coders;
 	int		i;
 
-	coders = malloc(sizeof(t_coder) * mng->arg->nb_coders); // Done
+	coders = malloc(sizeof(t_coder) * mng->arg->nb_coders);
 	if (!coders)
 		return (NULL);
 	i = -1;
@@ -93,20 +55,17 @@ void	init_dongles(t_manager *mng)
 	i = -1;
 	while (++i < mng->arg->nb_coders)
 	{
-		mng->coders[i % mng->arg->nb_coders].left_dongle = &mng->dongles[i % mng->arg->nb_coders];
-		mng->coders[i % mng->arg->nb_coders].right_dongle = &mng->dongles[(i + 1) % mng->arg->nb_coders];
+		mng->coders[i % mng->arg->nb_coders].left_dongle = \
+&mng->dongles[i % mng->arg->nb_coders];
+		mng->coders[i % mng->arg->nb_coders].right_dongle = \
+&mng->dongles[(i + 1) % mng->arg->nb_coders];
 		mng->coders[i % mng->arg->nb_coders].left_dongle->id = i + 1;
 		mng->coders[i % mng->arg->nb_coders].left_dongle->is_used = false;
 		mng->coders[i % mng->arg->nb_coders].left_dongle->cooldown_end = 0;
-		pthread_mutex_init(&mng->coders[i % mng->arg->nb_coders].left_dongle->mutex, NULL);
+		pthread_mutex_init(
+			&mng->coders[i % mng->arg->nb_coders].left_dongle->mutex, NULL);
 	}
-	i = -1;
-	while (++i < mng->arg->nb_coders)
-	{
-		init_heap(mng->coders[i].left_dongle);
-		heap_push(mng->coders[i % mng->arg->nb_coders].left_dongle, &mng->coders[i % mng->arg->nb_coders], mng);
-		heap_push(mng->coders[i % mng->arg->nb_coders].left_dongle, &mng->coders[(i + 1) % mng->arg->nb_coders], mng);
-	}
+	push_coders(mng);
 }
 
 t_manager	*init_manager(int argc, char **argv)
@@ -120,8 +79,6 @@ t_manager	*init_manager(int argc, char **argv)
 	if (!mng->arg)
 		return (NULL);
 	mng->coders = init_coders(mng);
-	// if (!mng->coders)
-	// 	return (free_mng_and_args(mng));
 	init_dongles(mng);
 	mng->start_timestamp = get_time_in_ms();
 	mng->is_ended = false;

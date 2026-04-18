@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/18 17:30:23 by gtourdia          #+#    #+#             */
+/*   Updated: 2026/04/18 17:30:43 by gtourdia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../codexion.h"
 
@@ -38,7 +49,7 @@ void	*monitor_routine(void *arg)
 
 	mng = (t_manager *) arg;
 	while (!check_end(mng) && !check_burnout(mng))
-		continue;
+		continue ;
 	return (NULL);
 }
 

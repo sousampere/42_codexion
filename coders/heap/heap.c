@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heap.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/18 17:38:56 by gtourdia          #+#    #+#             */
+/*   Updated: 2026/04/18 17:41:12 by gtourdia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../codexion.h"
 
@@ -5,21 +16,6 @@ void	init_heap(t_dongle *dongle)
 {
 	dongle->heap[0] = NULL;
 	dongle->heap[1] = NULL;
-}
-
-bool	will_deadlock(t_manager *mng)
-{
-	int	i;
-
-	i = -1;
-	while (++i < mng->arg->nb_coders)
-	{
-		if (mng->coders[i].left_dongle->heap[0] == NULL)
-			return (true);
-		if (mng->coders[i].left_dongle->heap[0]->id == mng->coders[i].id)
-			return (false);
-	}
-	return (true);
 }
 
 bool	has_heap_priority(t_dongle *dongle, t_coder *coder, t_manager *mng)
@@ -44,9 +40,9 @@ void	heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng)
 		dongle->heap[0] = coder;
 		return ;
 	}
-	if (mng->arg->scheduler == 1) // fifo
+	if (mng->arg->scheduler == 1)
 		dongle->heap[1] = coder;
-	else // edf
+	else
 	{
 		if (dongle->heap[0]->burnout_delay <= coder->burnout_delay)
 			dongle->heap[1] = coder;

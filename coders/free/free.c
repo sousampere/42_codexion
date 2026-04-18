@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/18 17:41:26 by gtourdia          #+#    #+#             */
+/*   Updated: 2026/04/18 17:41:28 by gtourdia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../codexion.h"
 
@@ -12,7 +22,6 @@ void	*free_mng_and_args(t_manager *mng)
 		free(mng->coders[i].left_dongle->heap[0]);
 		free(mng->coders[i].left_dongle->heap[1]);
 		free(mng->coders[i].left_dongle);
-		// free(mng->coders[i]);
 	}
 	free(mng->coders_threads);
 	free(mng->arg);
@@ -31,8 +40,6 @@ void	free_all(t_manager *mng)
 	while (++i < mng->arg->nb_coders)
 	{
 		pthread_mutex_destroy(&mng->coders[i].left_dongle->mutex);
-		// free(mng->dongles[i].heap[0]);
-		// free(mng->dongles[i].heap[1]);
 	}
 	free(mng->coders);
 	free(mng->dongles);

@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:24:13 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/18 17:41:41 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <time.h>
 # include <sys/time.h>
 # include <stdbool.h>
-# define INCREMENT --
 
 typedef struct s_dongle			t_dongle; // Pre-declaration
 typedef struct s_coder			t_coder; // Pre-declaration
@@ -82,6 +81,7 @@ void		free_all(t_manager *mng);
 
 // manager
 t_manager	*init_manager(int argc, char **argv);
+t_args		*get_args(int argc, char **argv);
 
 // heap
 void		init_heap(t_dongle *dongle);
@@ -89,6 +89,7 @@ void		heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng);
 void		heap_pop(t_dongle *dongle);
 bool		has_heap_priority(t_dongle *dongle, t_coder *coder, t_manager *mng);
 void		heap_rm(t_dongle *dongle, t_coder *coder);
+bool		will_deadlock(t_manager *mng);
 
 // monitor
 void		start_monitor(t_manager *mng);
@@ -103,6 +104,9 @@ int			get_rel_time(t_manager *mng);
 void		sprint(t_coder *coder, t_manager *mng, int code);
 
 // simulation
+void		compile(t_coder *coder, t_manager *mng);
+void		debug(t_coder *coder, t_manager *mng);
+void		refactor(t_coder *coder, t_manager *mng);
 void		start_simulation(t_manager *mng);
 
 #endif // !CODEXION_H

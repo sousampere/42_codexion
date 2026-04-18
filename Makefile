@@ -6,7 +6,7 @@
 #    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/18 16:53:57 by gtourdia         ###   ########.fr        #
+#    Updated: 2026/04/18 17:40:50 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,12 @@ FLAGS=-Wall -Wextra -Werror -pthread -g3
 C_FILES=coders/codexion.c\
 		\
 		coders/manager/create_manager.c\
+		coders/manager/arguments.c\
 		\
 		coders/free/free.c\
 		\
 		coders/heap/heap.c\
+		coders/heap/deadlock_check.c\
 		\
 		coders/monitor/monitor.c\
 		\
@@ -33,7 +35,8 @@ C_FILES=coders/codexion.c\
 		\
 		coders/printf_secure/sprint.c\
 		\
-		coders/simulation/simulation.c
+		coders/simulation/simulation.c\
+		coders/simulation/coder_moves.c
 
 # COLORS
 YELLOW=\033[0;33m

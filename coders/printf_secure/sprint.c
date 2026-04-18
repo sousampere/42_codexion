@@ -1,12 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprint.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/18 17:26:44 by gtourdia          #+#    #+#             */
+/*   Updated: 2026/04/18 17:29:59 by gtourdia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../codexion.h"
 
-
 void	sprint(t_coder *coder, t_manager *mng, int code)
 {
-	// printf("Locking printf\n");
 	pthread_mutex_lock(&mng->printf_mtx);
-	// printf("Printf locked\n");
 	if (code == 1 && !mng->is_ended)
 	{
 		printf("\033[0;33m%d %d has taken a dongle.\033[0m\n",
