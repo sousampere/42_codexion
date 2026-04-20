@@ -63,7 +63,6 @@ void	init_dongles(t_manager *mng)
 		mng->coders[i % mng->arg->nb_coders].left_dongle->is_used = false;
 		mng->coders[i % mng->arg->nb_coders].left_dongle->cooldown_end = 0;
 		pthread_mutex_init(&mng->coders[i].left_dongle->mutex, NULL);
-		pthread_mutex_init(&mng->coders[i].left_dongle->mtx_heap, NULL);
 		init_heap(&mng->dongles[1]);
 	}
 	push_coders(mng);
