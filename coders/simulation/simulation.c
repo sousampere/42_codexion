@@ -57,9 +57,6 @@ void	*routine(void *arg)
 	{
 		if (args->manager->arg->nb_coders == 1)
 			return (NULL);
-		// If I'm first in queue for the left dongle
-		// Pick up the left dongle
-		// Wait for the right dongle to be available
 		pickup_dongles(args->coder, args->manager);
 		heap_rm(args->coder->left_dongle, args->coder);
 		heap_rm(args->coder->right_dongle, args->coder);
@@ -69,10 +66,7 @@ void	*routine(void *arg)
 		refactor(args->coder, args->manager);
 		heap_push(args->coder->left_dongle, args->coder, args->manager);
 		heap_push(args->coder->right_dongle, args->coder, args->manager);
-		// start doing its thing
-		// release the dongles
 	}
-	printf("coder_%d is DONE\n", args->coder->id);
 	return (NULL);
 }
 
