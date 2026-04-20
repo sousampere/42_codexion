@@ -36,7 +36,9 @@ C_FILES=coders/codexion.c\
 		coders/printf_secure/sprint.c\
 		\
 		coders/simulation/simulation.c\
-		coders/simulation/coder_moves.c
+		coders/simulation/coder_moves.c\
+		\
+		coders/misc/is_end.c
 
 # COLORS
 YELLOW=\033[0;33m
@@ -84,7 +86,8 @@ run: $(NAME)
 	./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
 
 valgrind: re
-	valgrind --leak-check=full ./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
+	valgrind --tool=helgrind ./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
+# 	valgrind --leak-check=full ./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
 
 dbg: re run
 

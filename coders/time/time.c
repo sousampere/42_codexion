@@ -23,7 +23,11 @@ long	get_time_in_ms(void)
 int	get_rel_time(t_manager *mng)
 {
 	long	current_time;
+	int		rel_time;
 
 	current_time = get_time_in_ms();
-	return (current_time - mng->start_timestamp);
+	pthread_mutex_lock(&mng->rel_time_mtx);
+	rel_time = current_time - mng->start_timestamp;
+	pthread_mutex_unlock(&mng->rel_time_mtx);
+	return (rel_time);
 }

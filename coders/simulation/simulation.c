@@ -28,12 +28,12 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 			sprint(coder, mng, 1);
 			coder->left_dongle->is_used = true;
 			coder->right_dongle->is_used = true;
-			pthread_mutex_unlock(&coder->left_dongle->mutex);
 			pthread_mutex_unlock(&coder->right_dongle->mutex);
+			pthread_mutex_unlock(&coder->left_dongle->mutex);
 			return ;
 		}
-		pthread_mutex_unlock(&coder->left_dongle->mutex);
 		pthread_mutex_unlock(&coder->right_dongle->mutex);
+		pthread_mutex_unlock(&coder->left_dongle->mutex);
 	}
 }
 
@@ -53,7 +53,7 @@ void	*routine(void *arg)
 
 	args = (t_routine_arg *) arg;
 	while (args->coder->nb_compiles < args->manager->arg->nb_compiles
-		&& !args->manager->is_ended)
+		&& !is_ended(args->manager))
 	{
 		if (args->manager->arg->nb_coders == 1)
 			return (NULL);

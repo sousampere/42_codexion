@@ -21,11 +21,5 @@ int	main(int argc, char **argv)
 		return (printf("Invalid argument.\n"), 1);
 	start_simulation(mng);
 	start_monitor(mng);
-	// int i = -1;
-	// while (i < mng->arg->nb_coders)
-	// {
-	// 	printf("---coder_%d---\n-> left heap 0 = %d, left_heap 1 = %d",
-	// 	mng->coders[i].id, mng->coders[i].left_dongle->heap[0]->id, mng->coders[i].left_dongle->heap[0]->id);
-	// }
 	free_all(mng);
 }

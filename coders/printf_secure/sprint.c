@@ -15,16 +15,16 @@
 void	sprint(t_coder *coder, t_manager *mng, int code)
 {
 	pthread_mutex_lock(&mng->printf_mtx);
-	if (code == 1 && !mng->is_ended)
+	if (code == 1 && !is_ended(mng))
 		printf("\033[0;33m%d %d has taken a dongle\033[0m\n",
 			get_rel_time(mng), coder->id);
-	if (code == 2 && !mng->is_ended)
+	if (code == 2 && !is_ended(mng))
 		printf("\033[0;36m%d %d is compiling\033[0m\n",
 			get_rel_time(mng), coder->id);
-	if (code == 3 && !mng->is_ended)
+	if (code == 3 && !is_ended(mng))
 		printf("\033[0;34m%d %d is refactoring\033[0m\n",
 			get_rel_time(mng), coder->id);
-	if (code == 4 && !mng->is_ended)
+	if (code == 4 && !is_ended(mng))
 		printf("\033[0;35m%d %d is debugging\033[0m\n",
 			get_rel_time(mng), coder->id);
 	if (code == 5)

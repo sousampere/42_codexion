@@ -67,6 +67,8 @@ typedef struct s_manager
 	pthread_t		*coders_threads;
 	t_dongle		*dongles;
 	t_routine_arg	*routine_args;
+	pthread_mutex_t	gobal_mtx;
+	pthread_mutex_t	rel_time_mtx;
 }	t_manager;
 
 typedef struct s_routine_arg
@@ -109,5 +111,8 @@ void		debug(t_coder *coder, t_manager *mng);
 void		refactor(t_coder *coder, t_manager *mng);
 void		start_simulation(t_manager *mng);
 void		pickup_dongle(t_coder *coder, t_manager *mng);
+
+// misc
+bool		is_ended(t_manager *mng);
 
 #endif // !CODEXION_H

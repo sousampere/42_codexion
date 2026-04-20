@@ -22,7 +22,9 @@ bool	check_end(t_manager *mng)
 		if (mng->coders[i].nb_compiles != mng->arg->nb_compiles)
 			return (false);
 	}
+	pthread_mutex_lock(&mng->gobal_mtx);
 	mng->is_ended = true;
+	pthread_mutex_unlock(&mng->gobal_mtx);
 	sprint(&mng->coders[0], mng, 6);
 	return (true);
 }
@@ -36,7 +38,9 @@ bool	check_burnout(t_manager *mng)
 	{
 		if (get_rel_time(mng) >= mng->coders[i].burnout_delay && mng->coders[i].nb_compiles < mng->arg->nb_compiles)
 		{
+			pthread_mutex_lock(&mng->gobal_mtx);
 			mng->is_ended = true;
+			pthread_mutex_unlock(&mng->gobal_mtx);
 			sprint(&mng->coders[i], mng, 5);
 			printf("coder_%d, left_used=%d, right_used=%d, left_priority=%d, left_cooldown=%d, right_cooldown=%d\n",
 				mng->coders[i].id, mng->coders[i].left_dongle->is_used, mng->coders[i].right_dongle->is_used, has_heap_priority(mng->coders[i].left_dongle, &mng->coders[i]),
@@ -53,7 +57,10 @@ void	*monitor_routine(void *arg)
 
 	mng = (t_manager *) arg;
 	while (!check_end(mng) && !check_burnout(mng))
+	{
+		usleep(1000);
 		continue ;
+	}
 	return (NULL);
 }
 
@@ -61,7 +68,9 @@ void	start_monitor(t_manager *mng)
 {
 	pthread_t	thread;
 
+	pthread_mutex_lock(&mng->gobal_mtx);
 	mng->is_ended = 0;
+	pthread_mutex_unlock(&mng->gobal_mtx);
 	pthread_create(&thread, NULL, &monitor_routine, mng);
 	pthread_join(thread, NULL);
 }

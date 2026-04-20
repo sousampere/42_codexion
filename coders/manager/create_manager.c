@@ -63,7 +63,7 @@ void	init_dongles(t_manager *mng)
 		mng->coders[i % mng->arg->nb_coders].left_dongle->is_used = false;
 		mng->coders[i % mng->arg->nb_coders].left_dongle->cooldown_end = 0;
 		pthread_mutex_init(
-			&mng->coders[i % mng->arg->nb_coders].left_dongle->mutex, NULL);
+			&mng->coders[i].left_dongle->mutex, NULL);
 		init_heap(&mng->dongles[1]);
 	}
 	push_coders(mng);
@@ -84,5 +84,7 @@ t_manager	*init_manager(int argc, char **argv)
 	mng->start_timestamp = get_time_in_ms();
 	mng->is_ended = false;
 	pthread_mutex_init(&mng->printf_mtx, NULL);
+	pthread_mutex_init(&mng->gobal_mtx, NULL);
+	pthread_mutex_init(&mng->rel_time_mtx, NULL);
 	return (mng);
 }
