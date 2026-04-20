@@ -18,12 +18,11 @@ void	init_heap(t_dongle *dongle)
 	dongle->heap[1] = NULL;
 }
 
-bool	has_heap_priority(t_dongle *dongle, t_coder *coder, t_manager *mng)
+bool	has_heap_priority(t_dongle *dongle, t_coder *coder)
 {
-	(void) dongle;
-	(void) mng;
-	(void) coder;
-	return (true);
+	if (dongle->heap[0] == NULL)
+		return (true);
+	return (dongle->heap[0]->id == coder->id);
 }
 
 void	heap_pop(t_dongle *dongle)

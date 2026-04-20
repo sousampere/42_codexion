@@ -6,23 +6,44 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:27:29 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 18:50:32 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/20 10:13:08 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../codexion.h"
 
-void	release_dongles(t_coder *coder, t_manager *mng)
+
+void	pickup_dongles(t_coder *coder, t_manager *mng)
+{
+	while (true)
+	{
+		pthread_mutex_lock(&coder->left_dongle->mutex);
+		pthread_mutex_lock(&coder->right_dongle->mutex);
+		if (!coder->left_dongle->is_used && !coder->left_dongle->is_used
+			&& (has_heap_priority(coder->left_dongle, coder) || will_deadlock(mng))
+			&& coder->left_dongle->cooldown_end <= get_rel_time(mng)
+			&& coder->right_dongle->cooldown_end <= get_rel_time(mng))
+		{
+			sprint(coder, mng, 1);
+			sprint(coder, mng, 1);
+			coder->left_dongle->is_used = true;
+			coder->right_dongle->is_used = true;
+			pthread_mutex_unlock(&coder->left_dongle->mutex);
+			pthread_mutex_unlock(&coder->right_dongle->mutex);
+			return ;
+		}
+		pthread_mutex_unlock(&coder->left_dongle->mutex);
+		pthread_mutex_unlock(&coder->right_dongle->mutex);
+	}
+}
+
+void	release_dongles(t_coder *coder)
 {
 	pthread_mutex_lock(&coder->left_dongle->mutex);
 	coder->left_dongle->is_used = false;
-	coder->left_dongle->cooldown_end = get_rel_time(mng)
-		+ mng->arg->dongle_cooldown;
 	pthread_mutex_unlock(&coder->left_dongle->mutex);
 	pthread_mutex_lock(&coder->right_dongle->mutex);
 	coder->right_dongle->is_used = false;
-	coder->right_dongle->cooldown_end = get_rel_time(mng)
-		+ mng->arg->dongle_cooldown;
 	pthread_mutex_unlock(&coder->right_dongle->mutex);
 }
 
@@ -36,14 +57,28 @@ void	*routine(void *arg)
 	{
 		if (args->manager->arg->nb_coders == 1)
 			return (NULL);
-		// routine
+		// If I'm first in queue for the left dongle
+		// Pick up the left dongle
+		// Wait for the right dongle to be available
+		pickup_dongles(args->coder, args->manager);
+		heap_rm(args->coder->left_dongle, args->coder);
+		heap_rm(args->coder->right_dongle, args->coder);
+		compile(args->coder, args->manager);
+		release_dongles(args->coder);
+		debug(args->coder, args->manager);
+		refactor(args->coder, args->manager);
+		heap_push(args->coder->left_dongle, args->coder, args->manager);
+		heap_push(args->coder->right_dongle, args->coder, args->manager);
+		// start doing its thing
+		// release the dongles
 	}
+	printf("coder_%d is DONE\n", args->coder->id);
 	return (NULL);
 }
 
 void	start_simulation(t_manager *mng)
 {
-	int				i;
+	int	i;
 
 	i = -1;
 	mng->coders_threads = malloc(sizeof(pthread_t) * mng->arg->nb_coders);

@@ -87,7 +87,7 @@ t_args		*get_args(int argc, char **argv);
 void		init_heap(t_dongle *dongle);
 void		heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng);
 void		heap_pop(t_dongle *dongle);
-bool		has_heap_priority(t_dongle *dongle, t_coder *coder, t_manager *mng);
+bool		has_heap_priority(t_dongle *dongle, t_coder *coder);
 void		heap_rm(t_dongle *dongle, t_coder *coder);
 bool		will_deadlock(t_manager *mng);
 
@@ -108,5 +108,6 @@ void		compile(t_coder *coder, t_manager *mng);
 void		debug(t_coder *coder, t_manager *mng);
 void		refactor(t_coder *coder, t_manager *mng);
 void		start_simulation(t_manager *mng);
+void		pickup_dongle(t_coder *coder, t_manager *mng);
 
 #endif // !CODEXION_H

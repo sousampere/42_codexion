@@ -19,9 +19,7 @@ bool	will_deadlock(t_manager *mng)
 	i = -1;
 	while (++i < mng->arg->nb_coders)
 	{
-		if (mng->coders[i].left_dongle->heap[0] == NULL)
-			return (true);
-		if (mng->coders[i].left_dongle->heap[0]->id == mng->coders[i].id)
+		if (has_heap_priority(mng->coders[i].left_dongle, &mng->coders[i]))
 			return (false);
 	}
 	return (true);

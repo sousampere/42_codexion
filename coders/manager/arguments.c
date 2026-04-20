@@ -12,7 +12,6 @@
 
 #include "../codexion.h"
 
-// Overflow, negative, non-integer and non-digit protection
 int	is_invalid_value(char *string)
 {
 	int	i;
