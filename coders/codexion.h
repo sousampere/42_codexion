@@ -53,6 +53,7 @@ typedef struct s_dongle
 	int				id;
 	int				cooldown_end;
 	t_coder			*heap[2];
+	pthread_mutex_t	mtx_heap;
 	pthread_mutex_t	mutex;
 	bool			is_used;
 }	t_dongle;
@@ -114,5 +115,9 @@ void		pickup_dongle(t_coder *coder, t_manager *mng);
 
 // misc
 bool		is_ended(t_manager *mng);
+void		lock_dongles(t_coder *coder);
+void		unlock_dongles(t_coder *coder);
+int			has_enough_compiles(t_coder *coder, t_manager *mng);
+int			get_burnout(t_manager *mng, t_coder *coder);
 
 #endif // !CODEXION_H

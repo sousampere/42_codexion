@@ -38,7 +38,10 @@ C_FILES=coders/codexion.c\
 		coders/simulation/simulation.c\
 		coders/simulation/coder_moves.c\
 		\
-		coders/misc/is_end.c
+		coders/misc/is_end.c\
+		coders/misc/lock_dongles.c\
+		coders/misc/lock_nb_compiles.c\
+		coders/misc/lock_burnout.c
 
 # COLORS
 YELLOW=\033[0;33m

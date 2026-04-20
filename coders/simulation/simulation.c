@@ -17,8 +17,7 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 {
 	while (true)
 	{
-		pthread_mutex_lock(&coder->left_dongle->mutex);
-		pthread_mutex_lock(&coder->right_dongle->mutex);
+		lock_dongles(coder);
 		if (!coder->left_dongle->is_used && !coder->left_dongle->is_used
 			&& (has_heap_priority(coder->left_dongle, coder) || will_deadlock(mng))
 			&& coder->left_dongle->cooldown_end <= get_rel_time(mng)
@@ -28,12 +27,10 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 			sprint(coder, mng, 1);
 			coder->left_dongle->is_used = true;
 			coder->right_dongle->is_used = true;
-			pthread_mutex_unlock(&coder->right_dongle->mutex);
-			pthread_mutex_unlock(&coder->left_dongle->mutex);
+			unlock_dongles(coder);
 			return ;
 		}
-		pthread_mutex_unlock(&coder->right_dongle->mutex);
-		pthread_mutex_unlock(&coder->left_dongle->mutex);
+		unlock_dongles(coder);
 	}
 }
 

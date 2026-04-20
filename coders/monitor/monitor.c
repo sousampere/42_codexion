@@ -19,7 +19,7 @@ bool	check_end(t_manager *mng)
 	i = -1;
 	while (++i < mng->arg->nb_coders)
 	{
-		if (mng->coders[i].nb_compiles != mng->arg->nb_compiles)
+		if (!has_enough_compiles(&mng->coders[i], mng))
 			return (false);
 	}
 	pthread_mutex_lock(&mng->gobal_mtx);
@@ -36,7 +36,8 @@ bool	check_burnout(t_manager *mng)
 	i = -1;
 	while (++i < mng->arg->nb_coders)
 	{
-		if (get_rel_time(mng) >= mng->coders[i].burnout_delay && mng->coders[i].nb_compiles < mng->arg->nb_compiles)
+		if (get_rel_time(mng) >= get_burnout(mng, &mng->coders[i])
+			&& has_enough_compiles(&mng->coders[i], mng))
 		{
 			pthread_mutex_lock(&mng->gobal_mtx);
 			mng->is_ended = true;

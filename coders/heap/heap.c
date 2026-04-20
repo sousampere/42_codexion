@@ -14,28 +14,40 @@
 
 void	init_heap(t_dongle *dongle)
 {
+	pthread_mutex_lock(&dongle->mtx_heap);
 	dongle->heap[0] = NULL;
 	dongle->heap[1] = NULL;
+	pthread_mutex_unlock(&dongle->mtx_heap);
 }
 
 bool	has_heap_priority(t_dongle *dongle, t_coder *coder)
 {
+	bool	status;
+
+	pthread_mutex_lock(&dongle->mtx_heap);
 	if (dongle->heap[0] == NULL)
-		return (true);
-	return (dongle->heap[0]->id == coder->id);
+		status = true;
+	else
+		status = dongle->heap[0]->id == coder->id;
+	pthread_mutex_unlock(&dongle->mtx_heap);
+	return (status);
 }
 
 void	heap_pop(t_dongle *dongle)
 {
+	pthread_mutex_lock(&dongle->mtx_heap);
 	dongle->heap[0] = dongle->heap[1];
 	dongle->heap[1] = NULL;
+	pthread_mutex_unlock(&dongle->mtx_heap);
 }
 
 void	heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng)
 {
+	pthread_mutex_lock(&dongle->mtx_heap);
 	if (dongle->heap[0] == NULL)
 	{
 		dongle->heap[0] = coder;
+		pthread_mutex_unlock(&dongle->mtx_heap);
 		return ;
 	}
 	if (mng->arg->scheduler == 1)
@@ -50,12 +62,17 @@ void	heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng)
 		else
 			dongle->heap[1] = coder;
 	}
+	pthread_mutex_unlock(&dongle->mtx_heap);
 }
 
 void	heap_rm(t_dongle *dongle, t_coder *coder)
 {
+	pthread_mutex_lock(&dongle->mtx_heap);
 	if (dongle->heap[0] == NULL)
+	{
+		pthread_mutex_unlock(&dongle->mtx_heap);
 		return ;
+	}
 	else if (dongle->heap[0]->id == coder->id)
 	{
 		dongle->heap[0] = dongle->heap[1];
@@ -63,4 +80,5 @@ void	heap_rm(t_dongle *dongle, t_coder *coder)
 	}
 	else if (dongle->heap[1] != NULL && dongle->heap[1]->id == coder->id)
 		dongle->heap[1] = NULL;
+	pthread_mutex_unlock(&dongle->mtx_heap);
 }
