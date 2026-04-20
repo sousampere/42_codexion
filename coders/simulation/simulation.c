@@ -12,33 +12,6 @@
 
 #include "../codexion.h"
 
-bool	can_pick_dongles(t_coder *coder, t_manager *mng)
-{
-	bool	status;
-
-	printf("%d %d %d %d %d\n",
-	coder->left_dongle->is_used == 0,
-	coder->right_dongle->is_used == 0,
-	has_heap_priority(coder->left_dongle, coder, mng),
-	coder->left_dongle->cooldown_end <= get_rel_time(mng),
-	coder->right_dongle->cooldown_end <= get_rel_time(mng));
-	if (coder->left_dongle->is_used == 0
-		&& coder->right_dongle->is_used == 0
-		&& has_heap_priority(coder->left_dongle, coder, mng)
-		&& coder->left_dongle->cooldown_end <= get_rel_time(mng)
-		&& coder->right_dongle->cooldown_end <= get_rel_time(mng))
-	{
-		coder->left_dongle->is_used = true;
-		coder->right_dongle->is_used = true;
-		status = true;
-	}
-	else
-		status = false;
-	pthread_mutex_unlock(&coder->left_dongle->mutex);
-	pthread_mutex_unlock(&coder->right_dongle->mutex);
-	return (status);
-}
-
 void	release_dongles(t_coder *coder, t_manager *mng)
 {
 	pthread_mutex_lock(&coder->left_dongle->mutex);
@@ -63,19 +36,7 @@ void	*routine(void *arg)
 	{
 		if (args->manager->arg->nb_coders == 1)
 			return (NULL);
-		if (can_pick_dongles(args->coder, args->manager)
-		&& !args->manager->is_ended)
-		{
-			heap_rm(args->coder->left_dongle, args->coder);
-			heap_rm(args->coder->right_dongle, args->coder);
-			sprint(args->coder, args->manager, 1);
-			compile(args->coder, args->manager);
-			release_dongles(args->coder, args->manager);
-			debug(args->coder, args->manager);
-			refactor(args->coder, args->manager);
-			heap_push(args->coder->left_dongle, args->coder, args->manager);
-			heap_push(args->coder->right_dongle, args->coder, args->manager);
-		}
+		// routine
 	}
 	return (NULL);
 }

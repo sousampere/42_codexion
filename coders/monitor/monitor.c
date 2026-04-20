@@ -34,10 +34,18 @@ bool	check_burnout(t_manager *mng)
 	i = -1;
 	while (++i < mng->arg->nb_coders)
 	{
-		if (get_rel_time(mng) >= mng->coders[i].burnout_delay)
+		if (get_rel_time(mng) >= mng->coders[i].burnout_delay && mng->coders[i].nb_compiles < mng->arg->nb_compiles)
 		{
 			mng->is_ended = true;
 			sprint(&mng->coders[i], mng, 5);
+			printf("coder_%d %d %d %d %d %d nb_compiles=%d\n",
+				mng->coders[i].id,
+				mng->coders[i].left_dongle->is_used == 0,
+				mng->coders[i].right_dongle->is_used == 0,
+				has_heap_priority(mng->coders[i].left_dongle, &mng->coders[i], mng),
+				mng->coders[i].left_dongle->cooldown_end <= get_rel_time(mng),
+				mng->coders[i].right_dongle->cooldown_end <= get_rel_time(mng),
+				mng->coders[i].nb_compiles);
 			return (true);
 		}
 	}

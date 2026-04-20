@@ -31,3 +31,8 @@ void	refactor(t_coder *coder, t_manager *mng)
 	sprint(coder, mng, 3);
 	usleep(mng->arg->refactor_time * 1000);
 }
+
+void	pickup_dongle(t_coder *coder, t_manager *mng)
+{
+	sprint(coder, mng, 1);
+}

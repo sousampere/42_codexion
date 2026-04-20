@@ -20,11 +20,10 @@ void	init_heap(t_dongle *dongle)
 
 bool	has_heap_priority(t_dongle *dongle, t_coder *coder, t_manager *mng)
 {
-	if (dongle->heap[0] == NULL)
-		return (true);
-	if (will_deadlock(mng))
-		return (true);
-	return (dongle->heap[0]->id == coder->id);
+	(void) dongle;
+	(void) mng;
+	(void) coder;
+	return (true);
 }
 
 void	heap_pop(t_dongle *dongle)
@@ -44,13 +43,13 @@ void	heap_push(t_dongle *dongle, t_coder *coder, t_manager *mng)
 		dongle->heap[1] = coder;
 	else
 	{
-		if (dongle->heap[0]->burnout_delay <= coder->burnout_delay)
-			dongle->heap[1] = coder;
-		else
+		if (coder->burnout_delay <= dongle->heap[0]->burnout_delay)
 		{
 			dongle->heap[1] = dongle->heap[0];
 			dongle->heap[0] = coder;
 		}
+		else
+			dongle->heap[1] = coder;
 	}
 }
 
