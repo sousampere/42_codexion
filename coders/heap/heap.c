@@ -14,6 +14,7 @@
 
 void	init_heap(t_dongle *dongle)
 {
+	pthread_mutex_init(&dongle->mtx_heap, NULL);
 	pthread_mutex_lock(&dongle->mtx_heap);
 	dongle->heap[0] = NULL;
 	dongle->heap[1] = NULL;
