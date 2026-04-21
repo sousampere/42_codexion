@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:28:17 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:50:12 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:36:57 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	compile(t_coder *coder, t_manager *mng)
 void	debug(t_coder *coder, t_manager *mng)
 {
 	sprint(coder, mng, 4);
-	psleep(mng->arg->compile_time * 1000);
+	psleep(mng->arg->debug_time * 1000);
 }
 
 void	refactor(t_coder *coder, t_manager *mng)

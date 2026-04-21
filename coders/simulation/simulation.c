@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:27:29 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/21 12:07:00 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/21 13:15:28 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void	pickup_dongles(t_coder *coder, t_manager *mng)
 {
-	while (true)
+	while (!is_ended(mng))
 	{
 		lock_dongles(coder);
-		if (!coder->left_dongle->is_used && !coder->left_dongle->is_used
-			&& (has_heap_priority(coder->left_dongle, coder)
-				|| will_deadlock(mng))
+		if (!coder->left_dongle->is_used && !coder->right_dongle->is_used
+			&& (has_heap_priority(coder->left_dongle, coder))
 			&& coder->left_dongle->cooldown_end <= get_rel_time(mng)
 			&& coder->right_dongle->cooldown_end <= get_rel_time(mng))
 		{
@@ -31,7 +30,6 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 			return ;
 		}
 		unlock_dongles(coder);
-		psleep(100);
 	}
 }
 
@@ -59,6 +57,7 @@ void	*routine(void *arg)
 	{
 		if (args->manager->arg->nb_coders == 1)
 			return (NULL);
+		printf("%d started a cycle\n", args->coder->id);
 		pickup_dongles(args->coder, args->manager);
 		heap_rm(args->coder->left_dongle, args->coder);
 		heap_rm(args->coder->right_dongle, args->coder);
@@ -68,7 +67,7 @@ void	*routine(void *arg)
 		refactor(args->coder, args->manager);
 		heap_push(args->coder->left_dongle, args->coder, args->manager);
 		heap_push(args->coder->right_dongle, args->coder, args->manager);
-		psleep(100);
+		printf("%d ended a cycle\n", args->coder->id);
 	}
 	return (NULL);
 }
@@ -84,7 +83,8 @@ void	start_simulation(t_manager *mng)
 	{
 		mng->routine_args[i].manager = mng;
 		mng->routine_args[i].coder = &mng->coders[i];
-		pthread_create(&mng->coders_threads[i],
-			NULL, &routine, &mng->routine_args[i]);
+		if (pthread_create(&mng->coders_threads[i],
+			NULL, &routine, &mng->routine_args[i]) != 0)
+			return ;
 	}
 }

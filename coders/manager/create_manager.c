@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:31:18 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:38:44 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/21 13:21:27 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	init_dongles(t_manager *mng)
 		mng->coders[i % mng->arg->nb_coders].left_dongle->is_used = false;
 		mng->coders[i % mng->arg->nb_coders].left_dongle->cooldown_end = 0;
 		pthread_mutex_init(&mng->coders[i].left_dongle->mutex, NULL);
-		init_heap(&mng->dongles[1]);
 	}
 	push_coders(mng);
 }
