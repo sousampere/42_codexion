@@ -31,6 +31,7 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 			return ;
 		}
 		unlock_dongles(coder);
+		psleep(100);
 	}
 }
 
@@ -65,6 +66,7 @@ void	*routine(void *arg)
 		refactor(args->coder, args->manager);
 		heap_push(args->coder->left_dongle, args->coder, args->manager);
 		heap_push(args->coder->right_dongle, args->coder, args->manager);
+		psleep(100);
 	}
 	return (NULL);
 }
