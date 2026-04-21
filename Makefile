@@ -41,7 +41,8 @@ C_FILES=coders/codexion.c\
 		coders/misc/is_end.c\
 		coders/misc/lock_dongles.c\
 		coders/misc/lock_nb_compiles.c\
-		coders/misc/lock_burnout.c
+		coders/misc/lock_burnout.c\
+		coders/misc/ft_calloc.c
 
 # COLORS
 YELLOW=\033[0;33m

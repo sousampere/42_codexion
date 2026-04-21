@@ -56,7 +56,7 @@ void	*monitor_routine(void *arg)
 	mng = (t_manager *) arg;
 	while (!check_end(mng) && !check_burnout(mng))
 	{
-		usleep(1000);
+		psleep(1000);
 		continue ;
 	}
 	return (NULL);

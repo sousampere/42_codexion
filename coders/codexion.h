@@ -102,6 +102,7 @@ bool		check_end(t_manager *mng);
 // time
 long		get_time_in_ms(void);
 int			get_rel_time(t_manager *mng);
+void		psleep(long long usec);
 
 // printf_secure
 void		sprint(t_coder *coder, t_manager *mng, int code);
@@ -119,5 +120,6 @@ void		lock_dongles(t_coder *coder);
 void		unlock_dongles(t_coder *coder);
 int			has_enough_compiles(t_coder *coder, t_manager *mng);
 int			get_burnout(t_manager *mng, t_coder *coder);
+void		*ft_calloc(size_t nmemb, size_t size);
 
 #endif // !CODEXION_H

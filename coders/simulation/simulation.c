@@ -34,13 +34,15 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 	}
 }
 
-void	release_dongles(t_coder *coder)
+void	release_dongles(t_coder *coder, t_manager *mng)
 {
 	pthread_mutex_lock(&coder->left_dongle->mutex);
 	coder->left_dongle->is_used = false;
+	coder->left_dongle->cooldown_end = get_rel_time(mng) + mng->arg->dongle_cooldown;
 	pthread_mutex_unlock(&coder->left_dongle->mutex);
 	pthread_mutex_lock(&coder->right_dongle->mutex);
 	coder->right_dongle->is_used = false;
+	coder->right_dongle->cooldown_end = get_rel_time(mng) + mng->arg->dongle_cooldown;
 	pthread_mutex_unlock(&coder->right_dongle->mutex);
 }
 
@@ -58,7 +60,7 @@ void	*routine(void *arg)
 		heap_rm(args->coder->left_dongle, args->coder);
 		heap_rm(args->coder->right_dongle, args->coder);
 		compile(args->coder, args->manager);
-		release_dongles(args->coder);
+		release_dongles(args->coder, args->manager);
 		debug(args->coder, args->manager);
 		refactor(args->coder, args->manager);
 		heap_push(args->coder->left_dongle, args->coder, args->manager);

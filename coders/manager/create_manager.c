@@ -49,7 +49,7 @@ void	init_dongles(t_manager *mng)
 {
 	int			i;
 
-	mng->dongles = malloc(sizeof(t_dongle) * mng->arg->nb_coders);
+	mng->dongles = ft_calloc(mng->arg->nb_coders, sizeof(t_dongle));
 	if (!mng->dongles)
 		return ;
 	i = -1;

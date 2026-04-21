@@ -17,6 +17,11 @@ int	main(int argc, char **argv)
 	t_manager	*mng;
 
 	mng = init_manager(argc, argv);
+	// printf("before -> %d\n", get_rel_time(mng));
+	// psleep(2000);
+	// // usleep(2000);
+	// printf("after -> %d\n", get_rel_time(mng));
+	// exit(0);
 	if (!mng)
 		return (printf("Invalid argument.\n"), 1);
 	start_simulation(mng);

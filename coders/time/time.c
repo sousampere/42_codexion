@@ -31,3 +31,22 @@ int	get_rel_time(t_manager *mng)
 	pthread_mutex_unlock(&mng->rel_time_mtx);
 	return (rel_time);
 }
+
+long long	get_time_in_usec(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((long long)tv.tv_sec * 1000000 + tv.tv_usec);
+}
+
+void	psleep(long long usec)
+{
+	long long	start;
+
+	start = get_time_in_usec();
+	if (usec > 500)
+		usleep(usec - 500);
+	while ((get_time_in_usec() - start) < usec)
+		continue ;
+}
