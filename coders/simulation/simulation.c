@@ -6,12 +6,11 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:27:29 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/20 10:13:08 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:07:00 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../codexion.h"
-
 
 void	pickup_dongles(t_coder *coder, t_manager *mng)
 {
@@ -19,7 +18,8 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 	{
 		lock_dongles(coder);
 		if (!coder->left_dongle->is_used && !coder->left_dongle->is_used
-			&& (has_heap_priority(coder->left_dongle, coder) || will_deadlock(mng))
+			&& (has_heap_priority(coder->left_dongle, coder)
+				|| will_deadlock(mng))
 			&& coder->left_dongle->cooldown_end <= get_rel_time(mng)
 			&& coder->right_dongle->cooldown_end <= get_rel_time(mng))
 		{
@@ -39,11 +39,13 @@ void	release_dongles(t_coder *coder, t_manager *mng)
 {
 	pthread_mutex_lock(&coder->left_dongle->mutex);
 	coder->left_dongle->is_used = false;
-	coder->left_dongle->cooldown_end = get_rel_time(mng) + mng->arg->dongle_cooldown;
+	coder->left_dongle->cooldown_end = get_rel_time(
+			mng) + mng->arg->dongle_cooldown;
 	pthread_mutex_unlock(&coder->left_dongle->mutex);
 	pthread_mutex_lock(&coder->right_dongle->mutex);
 	coder->right_dongle->is_used = false;
-	coder->right_dongle->cooldown_end = get_rel_time(mng) + mng->arg->dongle_cooldown;
+	coder->right_dongle->cooldown_end = get_rel_time(
+			mng) + mng->arg->dongle_cooldown;
 	pthread_mutex_unlock(&coder->right_dongle->mutex);
 }
 

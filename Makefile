@@ -6,7 +6,7 @@
 #    By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/03 06:57:12 by gtourdia          #+#    #+#              #
-#    Updated: 2026/04/18 17:40:50 by gtourdia         ###   ########.fr        #
+#    Updated: 2026/04/21 12:06:25 by gtourdia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,9 +89,13 @@ run: $(NAME)
 	@printf "$(CYAN)[Clean]$(RESET) ➡️  Running program...\n"
 	./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
 
-valgrind: re
+leaks:
+	valgrind --leak-check=full ./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
+
+datarace:
 	valgrind --tool=helgrind ./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
-# 	valgrind --leak-check=full ./$(NAME) $(NB_CODERS) $(BURNOUT) $(COMPILE) $(DEBUG) $(REFACTOR) $(NB_COMPILES) $(DONGLE_COOLDOWN) $(SCHEDULER)
+
+valgrind: re leaks datarace
 
 dbg: re run
 
