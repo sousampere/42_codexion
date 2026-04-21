@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:27:29 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/21 13:15:28 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/21 17:41:10 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 			return ;
 		}
 		unlock_dongles(coder);
+		psleep(1000);
 	}
 }
 
@@ -57,6 +58,8 @@ void	*routine(void *arg)
 	{
 		if (args->manager->arg->nb_coders == 1)
 			return (NULL);
+		heap_push(args->coder->left_dongle, args->coder, args->manager);
+		heap_push(args->coder->right_dongle, args->coder, args->manager);
 		printf("%d started a cycle\n", args->coder->id);
 		pickup_dongles(args->coder, args->manager);
 		heap_rm(args->coder->left_dongle, args->coder);
@@ -65,9 +68,8 @@ void	*routine(void *arg)
 		release_dongles(args->coder, args->manager);
 		debug(args->coder, args->manager);
 		refactor(args->coder, args->manager);
-		heap_push(args->coder->left_dongle, args->coder, args->manager);
-		heap_push(args->coder->right_dongle, args->coder, args->manager);
 		printf("%d ended a cycle\n", args->coder->id);
+		psleep(1000);
 	}
 	return (NULL);
 }

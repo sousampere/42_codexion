@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:19:28 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:41:41 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/21 16:53:51 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void		heap_pop(t_dongle *dongle);
 bool		has_heap_priority(t_dongle *dongle, t_coder *coder);
 void		heap_rm(t_dongle *dongle, t_coder *coder);
 bool		will_deadlock(t_manager *mng);
+bool		is_most_urgent(t_manager *mng, t_coder *coder);
 
 // monitor
 void		start_monitor(t_manager *mng);

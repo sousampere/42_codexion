@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:38:56 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 18:41:51 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/21 16:53:33 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,26 @@ void	init_heap(t_dongle *dongle)
 	dongle->heap[0] = NULL;
 	dongle->heap[1] = NULL;
 	pthread_mutex_unlock(&dongle->mtx_heap);
+}
+
+bool	is_most_urgent(t_manager *mng, t_coder *coder)
+{
+	int	i;
+	int	id;
+	int	deadline;
+
+	i = -1;
+	id = -1;
+	deadline = -1;
+	while (++i < mng->arg->nb_coders)
+	{
+		if (deadline == -1 || mng->coders[i].burnout_delay <= coder->burnout_delay)
+		{
+			deadline = mng->coders[i].burnout_delay;	
+			id = mng->coders[i].id;
+		}
+	}
+	return (coder->id == id);	
 }
 
 bool	has_heap_priority(t_dongle *dongle, t_coder *coder)
