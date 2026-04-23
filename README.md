@@ -1,5 +1,14 @@
 *This project has been created as part of the 42 curriculum by gtourdia*
 
+
+OPULLALA REVOIS LE MAKE
+ET REVOIS LE PARSING
+chaines de char vides
+valeurs a 0
+enchaine,ent de nulls
+check valeur de illegale usleep
+
+
 # Description
 Codexion is a project from the 42 common core where the developper has to simulate multiple coders trying
 to "survive" by compiling, debugging and refactoring code. If a coder doesn't compile in the given time,
