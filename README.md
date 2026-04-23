@@ -1,7 +1,7 @@
 *This project has been created as part of the 42 curriculum by gtourdia*
 
 
-OPULLALA REVOIS LE MAKE
+<!-- OPULLALA REVOIS LE MAKE -->
 ET REVOIS LE PARSING
 chaines de char vides
 valeurs a 0

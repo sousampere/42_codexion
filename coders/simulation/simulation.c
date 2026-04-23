@@ -6,15 +6,11 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:27:29 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/23 16:53:45 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:02:59 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../codexion.h"
-
-// ----- Verifications
-
-
 
 void	pickup_dongles(t_coder *coder, t_manager *mng)
 {
@@ -27,7 +23,6 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 			&& has_heap_priority(coder->right_dongle, coder)
 			&& coder->left_dongle->cooldown_end <= get_rel_time(mng)
 			&& coder->right_dongle->cooldown_end <= get_rel_time(mng)
-			// && coder->nb_compiles >= mng->coders[(coder->id + 1) % mng->arg->nb_coders].nb_compiles
 		)
 		{
 			sprint(coder, mng, 1);
@@ -43,7 +38,6 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 		psleep(1000);
 	}
 }
-
 
 void	release_dongles(t_coder *coder, t_manager *mng)
 {
@@ -64,17 +58,6 @@ void	*routine(void *arg)
 	t_routine_arg	*args;
 
 	args = (t_routine_arg *) arg;
-	// if (args->coder->id % 2 == 0)
-	// {
-	// 	heap_push(args->coder->left_dongle, args->coder, args->manager);
-	// 	heap_push(args->coder->right_dongle, args->coder, args->manager);
-	// }
-	// else
-	// {
-	// 	psleep(500);
-	// 	heap_push(args->coder->left_dongle, args->coder, args->manager);
-	// 	heap_push(args->coder->right_dongle, args->coder, args->manager);
-	// }
 	while (args->coder->nb_compiles < args->manager->arg->nb_compiles
 		&& !is_ended(args->manager))
 	{
@@ -105,7 +88,7 @@ void	start_simulation(t_manager *mng)
 		mng->routine_args[i].manager = mng;
 		mng->routine_args[i].coder = &mng->coders[i];
 		if (pthread_create(&mng->coders_threads[i],
-			NULL, &routine, &mng->routine_args[i]) != 0)
+				NULL, &routine, &mng->routine_args[i]) != 0)
 			return ;
 	}
 }

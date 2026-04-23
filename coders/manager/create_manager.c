@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:31:18 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/23 16:55:43 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:02:16 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_manager	*init_manager(int argc, char **argv)
 	mng->arg = get_args(argc, argv);
 	if (!mng->arg)
 	{
-		free(mng);		
+		free(mng);
 		return (NULL);
 	}
 	mng->coders = init_coders(mng);
