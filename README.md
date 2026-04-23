@@ -100,7 +100,7 @@ AI tools (GitHub Copilot & Google Gemini) were utilized for:
 
 ## Additionnal informations
 
-### Deadlock prevention
+### Blocking cases handled | Deadlock prevention
 
 I prevented deadlock by restricting the coders to having both dongles available and being number 1 in the priority queue of its left dongle to then take both at one time.
 
@@ -110,7 +110,7 @@ To finish, I pushed all non-even coder_ids first, and then the even one to each 
 This way, coders will alternate compilation between even and non-even ones, preventing deadlock
 and optimizing everything.
 
-### Log serialization
+### Thread synchronization mechanisms | Log serialization
 
 I used a mutex to lock the printf usage. Therefore, no coders can print at the same time.
 
