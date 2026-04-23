@@ -46,6 +46,7 @@ typedef struct s_coder
 	int			nb_compiles;
 	t_dongle	*left_dongle;
 	t_dongle	*right_dongle;
+	int			dongles_status;
 }	t_coder;
 
 typedef struct s_dongle
@@ -113,7 +114,6 @@ void		compile(t_coder *coder, t_manager *mng);
 void		debug(t_coder *coder, t_manager *mng);
 void		refactor(t_coder *coder, t_manager *mng);
 void		start_simulation(t_manager *mng);
-void		pickup_dongle(t_coder *coder, t_manager *mng);
 
 // misc
 bool		is_ended(t_manager *mng);

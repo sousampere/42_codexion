@@ -12,20 +12,30 @@
 
 #include "../codexion.h"
 
+// ----- Verifications
+
+
+
 void	pickup_dongles(t_coder *coder, t_manager *mng)
 {
 	while (!is_ended(mng))
 	{
 		lock_dongles(coder);
-		if (!coder->left_dongle->is_used && !coder->right_dongle->is_used
-			&& (has_heap_priority(coder->left_dongle, coder))
+		if (!coder->left_dongle->is_used
+			&& !coder->right_dongle->is_used
+			&& has_heap_priority(coder->left_dongle, coder)
+			&& has_heap_priority(coder->right_dongle, coder)
 			&& coder->left_dongle->cooldown_end <= get_rel_time(mng)
-			&& coder->right_dongle->cooldown_end <= get_rel_time(mng))
+			&& coder->right_dongle->cooldown_end <= get_rel_time(mng)
+			// && coder->nb_compiles >= mng->coders[(coder->id + 1) % mng->arg->nb_coders].nb_compiles
+		)
 		{
 			sprint(coder, mng, 1);
 			sprint(coder, mng, 1);
-			coder->left_dongle->is_used = true;
-			coder->right_dongle->is_used = true;
+			coder->right_dongle->is_used = 1;
+			coder->left_dongle->is_used = 1;
+			heap_pop(coder->left_dongle);
+			heap_pop(coder->right_dongle);
 			unlock_dongles(coder);
 			return ;
 		}
@@ -33,6 +43,7 @@ void	pickup_dongles(t_coder *coder, t_manager *mng)
 		psleep(1000);
 	}
 }
+
 
 void	release_dongles(t_coder *coder, t_manager *mng)
 {
@@ -53,23 +64,29 @@ void	*routine(void *arg)
 	t_routine_arg	*args;
 
 	args = (t_routine_arg *) arg;
+	// if (args->coder->id % 2 == 0)
+	// {
+	// 	heap_push(args->coder->left_dongle, args->coder, args->manager);
+	// 	heap_push(args->coder->right_dongle, args->coder, args->manager);
+	// }
+	// else
+	// {
+	// 	psleep(500);
+	// 	heap_push(args->coder->left_dongle, args->coder, args->manager);
+	// 	heap_push(args->coder->right_dongle, args->coder, args->manager);
+	// }
 	while (args->coder->nb_compiles < args->manager->arg->nb_compiles
 		&& !is_ended(args->manager))
 	{
 		if (args->manager->arg->nb_coders == 1)
 			return (NULL);
-		heap_push(args->coder->left_dongle, args->coder, args->manager);
-		heap_push(args->coder->right_dongle, args->coder, args->manager);
-		printf("%d started a cycle\n", args->coder->id);
 		pickup_dongles(args->coder, args->manager);
-		heap_rm(args->coder->left_dongle, args->coder);
-		heap_rm(args->coder->right_dongle, args->coder);
 		compile(args->coder, args->manager);
 		release_dongles(args->coder, args->manager);
-		debug(args->coder, args->manager);
 		refactor(args->coder, args->manager);
-		printf("%d ended a cycle\n", args->coder->id);
-		psleep(1000);
+		debug(args->coder, args->manager);
+		heap_push(args->coder->left_dongle, args->coder, args->manager);
+		heap_push(args->coder->right_dongle, args->coder, args->manager);
 	}
 	return (NULL);
 }

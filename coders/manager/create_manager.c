@@ -18,13 +18,27 @@ void	push_coders(t_manager *mng)
 
 	i = -1;
 	while (++i < mng->arg->nb_coders)
-	{
 		init_heap(mng->coders[i].left_dongle);
-		heap_push(mng->coders[i % mng->arg->nb_coders].left_dongle,
-			&mng->coders[i % mng->arg->nb_coders], mng);
-		heap_push(mng->coders[i % mng->arg->nb_coders].left_dongle,
-			&mng->coders[(i + 1) % mng->arg->nb_coders], mng);
+	i = -1;
+	while (++i < mng->arg->nb_coders)
+	{
+		if (mng->coders[i].id % 2 != 0)
+		{
+			heap_push(mng->coders[i].left_dongle, &mng->coders[i], mng);
+			heap_push(mng->coders[i].right_dongle, &mng->coders[i], mng);
+		}
 	}
+	i = -1;
+	while (++i < mng->arg->nb_coders)
+	{
+		if (mng->coders[i].id % 2 == 0)
+		{
+			heap_push(mng->coders[i].left_dongle, &mng->coders[i], mng);
+			heap_push(mng->coders[i].right_dongle, &mng->coders[i], mng);
+		}
+	}
+	(void) mng;
+	return ;
 }
 
 t_coder	*init_coders(t_manager *mng)
@@ -41,6 +55,7 @@ t_coder	*init_coders(t_manager *mng)
 		coders[i].id = i + 1;
 		coders[i].burnout_delay = mng->arg->burnout_time;
 		coders[i].nb_compiles = 0;
+		coders[i].dongles_status = 0;
 	}
 	return (coders);
 }
