@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:31:18 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/21 16:23:15 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:55:43 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,20 @@ t_manager	*init_manager(int argc, char **argv)
 {
 	t_manager	*mng;
 
+	if (argc != 9)
+		return (NULL);
 	mng = malloc(sizeof(t_manager));
 	if (!mng)
 		return (NULL);
 	mng->arg = get_args(argc, argv);
 	if (!mng->arg)
+	{
+		free(mng);		
 		return (NULL);
+	}
 	mng->coders = init_coders(mng);
+	if (!mng->coders)
+		return (NULL);
 	init_dongles(mng);
 	mng->start_timestamp = get_time_in_ms();
 	mng->is_ended = false;

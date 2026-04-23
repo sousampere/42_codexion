@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:27:29 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/21 17:41:10 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:53:45 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	start_simulation(t_manager *mng)
 	i = -1;
 	mng->coders_threads = malloc(sizeof(pthread_t) * mng->arg->nb_coders);
 	mng->routine_args = malloc(sizeof(t_routine_arg) * mng->arg->nb_coders);
+	if (!mng->coders_threads || !mng->routine_args)
+		return ;
 	while (++i < mng->arg->nb_coders)
 	{
 		mng->routine_args[i].manager = mng;

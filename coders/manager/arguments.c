@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:35:41 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:36:04 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:50:03 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,39 @@ int	validate_args(char **argv)
 	{
 		if (i == 8)
 			break ;
-		if (is_invalid_value(argv[i]))
+		if (is_invalid_value(argv[i]) || strlen(argv[i]) == 0)
+		{
+			printf("Argument number %d invalid.\n", i);
 			return (0);
+		}
 	}
 	return (1);
+}
+
+void	*send_error(int id)
+{
+	if (id == 1)
+		printf("Not enough arguments.\n");
+	if (id == 2)
+		printf("Scheduler must be \"fifo\" or \"edf\".\n");
+	if (id == 3)
+		printf("Failed to allocate memory.\n");
+	return (NULL);
 }
 
 t_args	*get_args(int argc, char **argv)
 {
 	t_args	*args_ptr;
 
+	if (argc != 9)
+		return (send_error(1));
 	if (!validate_args(argv))
 		return (NULL);
 	if (strcmp(argv[8], "fifo") != 0 && strcmp(argv[8], "edf") != 0)
-		return (NULL);
-	if (argc != 9)
-		return (NULL);
+		return (send_error(2));
 	args_ptr = malloc(sizeof(t_args));
 	if (!args_ptr)
-		return (NULL);
+		return (send_error(3));
 	args_ptr->nb_coders = atoi(argv[1]);
 	args_ptr->burnout_time = atoi(argv[2]);
 	args_ptr->compile_time = atoi(argv[3]);
