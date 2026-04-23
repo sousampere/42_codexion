@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:41:26 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/21 12:15:27 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:33:20 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	free_all(t_manager *mng)
 	int	i;
 
 	i = -1;
-	// while (++i < mng->arg->nb_coders)
-	// 	pthread_join(mng->coders_threads[i], NULL);
+	while (++i < mng->arg->nb_coders)
+		pthread_join(mng->coders_threads[i], NULL);
 	i = -1;
 	while (++i < mng->arg->nb_coders)
 	{
