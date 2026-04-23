@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:26:44 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/23 17:30:55 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:31:56 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	sprint(t_coder *coder, t_manager *mng, int code)
 		printf("\033[0;33m%d %d has taken a dongle\033[0m\n",
 			get_rel_time(mng), coder->id);
 	if (code == 2 && !is_ended(mng))
-		printf("\033[0;36m%d %d is compiling\033[0m\n");
+		printf("\033[0;36m%d %d is compiling\033[0m\n",
+			get_rel_time(mng), coder->id);
 	if (code == 3 && !is_ended(mng))
 		printf("\033[0;34m%d %d is refactoring\033[0m\n",
 			get_rel_time(mng), coder->id);
