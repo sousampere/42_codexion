@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:26:56 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/18 17:26:58 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:12:01 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	psleep(long long usec)
 	long long	start;
 
 	start = get_time_in_usec();
+	if (usec > 1000000)
+		return ;
 	if (usec > 500)
 		usleep(usec - 500);
 	while ((get_time_in_usec() - start) < usec)

@@ -2,11 +2,11 @@
 
 
 <!-- OPULLALA REVOIS LE MAKE -->
-ET REVOIS LE PARSING
-chaines de char vides
-valeurs a 0
-enchaine,ent de nulls
-check valeur de illegale usleep
+<!-- ET REVOIS LE PARSING -->
+<!-- chaines de char vides -->
+<!-- valeurs a 0 -->
+<!-- enchaine,ent de nulls -->
+<!-- check valeur de illegale usleep -->
 
 
 # Description
@@ -105,6 +105,10 @@ AI tools (GitHub Copilot & Google Gemini) were utilized for:
 I prevented deadlock by restricting the coders to having both dongles available and being number 1 in the priority queue of its left dongle to then take both at one time.
 
 Also, I added a function to bypass priority queue when a deadlock is inevitable.
+
+To finish, I pushed all non-even coder_ids first, and then the even one to each dongle's heap.
+This way, coders will alternate compilation between even and non-even ones, preventing deadlock
+and optimizing everything.
 
 ### Log serialization
 

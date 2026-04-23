@@ -6,7 +6,7 @@
 /*   By: gtourdia <@student.42mulhouse.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:35:41 by gtourdia          #+#    #+#             */
-/*   Updated: 2026/04/23 16:50:03 by gtourdia         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:16:22 by gtourdia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ int	validate_args(char **argv)
 		if (is_invalid_value(argv[i]) || strlen(argv[i]) == 0)
 		{
 			printf("Argument number %d invalid.\n", i);
+			return (0);
+		}
+		if ((i == 3 || i == 4 || i == 5 || i == 7) && atoi(argv[i]) > 500000)
+		{
+			printf("Value %d is too high to be used with usleep.\n", i);
+			return (0);
+		}
+		if (i == 1 && atoi(argv[i]) >= 250)
+		{
+			printf("Please, use less than 250 coders.\n");
 			return (0);
 		}
 	}
